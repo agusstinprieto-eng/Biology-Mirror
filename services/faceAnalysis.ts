@@ -115,11 +115,17 @@ export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSV
     }
 
     return new Promise((resolve) => {
+        const timeout = setTimeout(() => {
+            console.warn("Face analysis timed out, returning neutral FACS");
+            resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
+        }, 2000); // 2 second safety timeout
+
         sharedCanvas!.width = videoElement.videoWidth;
         sharedCanvas!.height = videoElement.videoHeight;
         sharedCtx!.drawImage(videoElement, 0, 0, sharedCanvas!.width, sharedCanvas!.height);
 
         faceMesh!.onResults((results) => {
+            clearTimeout(timeout);
             if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
                 resolve(calculateFACS(results.multiFaceLandmarks[0]));
             } else {
@@ -134,7 +140,8 @@ export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSV
 // Analyze multiple frames (optimized: removed setTimeout)
 export const analyzeFaceMultiFrame = async (
     videoElement: HTMLVideoElement,
-    numFrames: number = 10
+    numFrames: number = 10,
+    onProgress?: (progress: number) => void
 ): Promise<FACSVector> => {
     const results: FACSVector[] = [];
 
@@ -142,7 +149,12 @@ export const analyzeFaceMultiFrame = async (
         try {
             const facs = await analyzeFace(videoElement);
             results.push(facs);
-            // Non-blocking wait for next frame if needed, but here we want speed
+
+            if (onProgress) {
+                onProgress(Math.round(((i + 1) / numFrames) * 100));
+            }
+
+            // Non-blocking wait for next frame
             if (i % 5 === 0) await new Promise(resolve => requestAnimationFrame(resolve));
         } catch (error) {
             console.error('Error analyzing frame:', error);

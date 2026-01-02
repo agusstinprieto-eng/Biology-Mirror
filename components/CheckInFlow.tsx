@@ -68,8 +68,9 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
 
     try {
       setAnalysisStatus('Leyendo micro-gestos (FACS)...');
-      const facs = await analyzeFaceMultiFrame(videoRef.current, 15);
-      setAnalysisProgress(40);
+      const facs = await analyzeFaceMultiFrame(videoRef.current, 15, (p) => {
+        setAnalysisProgress(Math.round(p * 0.4)); // FACS represents first 40%
+      });
 
       setAnalysisStatus('Capturando pulso biológico (rPPG)...');
       const bio = await analyzeHeartRate(videoRef.current, 3500); // Reduced to 3.5s for speed
