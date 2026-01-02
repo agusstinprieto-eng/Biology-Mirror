@@ -6,6 +6,7 @@ import { VagalGarden } from './VagalGarden';
 import { FacsRadarChart } from './charts/RadarChart';
 import { HRVTimeline } from './charts/HRVTimeline';
 import { HeartBeatIndicator } from './HeartBeatIndicator';
+import { BioMap } from './BioMap';
 import { generatePDFReport } from '../services/pdfService';
 
 interface ComparisonViewProps {
