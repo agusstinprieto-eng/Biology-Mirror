@@ -19,12 +19,13 @@ export const generatePDFReport = async (
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('times', 'bold');
-    doc.text('Espejo-Neurosomatico', 20, 25);
+    doc.text('Espejo-Neurosomatico', 20, 22);
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
-    doc.text('REPORTE DE FENOTIPADO DIGITAL NEURO-SOMÁTICO', 20, 32);
-    doc.text(format(new Date(), 'dd/MM/yyyy HH:mm'), 170, 32);
+    doc.text('REPORTE DE FENOTIPADO DIGITAL NEURO-SOMÁTICO', 20, 29);
+    doc.text(`Participante: ${post.userName || pre.userName || 'Usuario Anónimo'}`, 20, 35);
+    doc.text(format(new Date(), 'dd/MM/yyyy HH:mm'), 170, 29);
 
     // Executive Summary
     doc.setTextColor(33, 33, 33);
@@ -87,5 +88,6 @@ export const generatePDFReport = async (
     doc.text(splitDisclaimer, 20, 280);
 
     // Save the PDF
-    doc.save(`EspejoNeurosomatico_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
+    const nameSlug = (post.userName || pre.userName || 'Usuario').replace(/\s+/g, '_');
+    doc.save(`Espejo_${nameSlug}_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
 };
