@@ -18,11 +18,16 @@ export const analyzeTransformation = async (pre: SessionData, post?: SessionData
   const ai = new GoogleGenAI({ apiKey });
 
   const userMessage = `
-    Analiza los siguientes datos de fenotipado digital.
+    Analiza los siguientes datos de fenotipado digital, prestando especial atención a los nuevos marcadores de vitalidad profunda.
+    
     ESTADO PRE-RETIRO:
     ${JSON.stringify(pre, null, 2)}
     
     ${post ? `ESTADO POST-RETIRO:\n${JSON.stringify(post, null, 2)}` : 'SOLO EVALUACIÓN INICIAL DISPONIBLE.'}
+    
+    IMPORTANTE:
+    - Interpreta la "fatigueIndex" (0-100) como carga alostática acumulada. >60 indica burnout neurofisiológico.
+    - Interpreta la "skinVitality" (0-100) como "Resplandor Vagal". Un aumento indica mejor oxigenación y reducción de inflamación sistémica.
     
     Procesa esto siguiendo las instrucciones del Dr. Alara y devuelve el JSON solicitado.
   `;

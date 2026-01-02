@@ -25,12 +25,14 @@ export interface GazeMetrics {
   blinkRate: number;
   pui: number; // Pupil Unrest Index
   stability: number;
+  fatigueIndex: number; // 0-100, where 100 is highly fatigued
 }
 
 export interface SkinAnalysis {
   homogeneity: number;
   redness: number;
   textureRoughness: number;
+  skinVitality: number; // 0-100 score
 }
 
 export interface VoiceMetrics {

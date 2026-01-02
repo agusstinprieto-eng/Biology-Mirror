@@ -31,15 +31,28 @@ export const initializeFaceMesh = (): Promise<void> => {
         });
 
         faceMesh.onResults((results) => {
+            // Priority 1: Single frame analysis promise
             if (activeResolve) {
                 activeResolve(results);
                 activeResolve = null;
+            }
+            // Priority 2: Real-time listeners
+            if (onResultsCallback) {
+                onResultsCallback(results);
             }
         });
 
         faceMesh.initialize().then(() => resolve()).catch(reject);
     });
 };
+
+let onResultsCallback: ((results: any) => void) | null = null;
+
+export const setRealtimeCallback = (cb: (results: any) => void) => {
+    onResultsCallback = cb;
+};
+
+export const getFaceMeshInstance = () => faceMesh;
 
 const calculateDistance = (p1: any, p2: any): number => {
     return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));

@@ -193,8 +193,8 @@ const MetricCard: React.FC<{ label: string, data: SessionData, theme: 'amber' | 
       <h3 className={`text-lg font-bold mb-8 uppercase tracking-widest ${isPre ? 'text-[#c5a059]' : 'text-[#2d4a3e]'}`}>{label}</h3>
       <div className="grid grid-cols-2 gap-8">
         <MetricItem label="HRV (VFC)" value={`${data.bio.hrv}ms`} sub="Resiliencia" />
-        <MetricItem label="Ritmo Cardíaco" value={`${data.bio.heartRate} BPM`} sub="Carga" />
-        <MetricItem label="Homogeneidad" value={`${data.skin.homogeneity}%`} sub="Micro-perfusión" />
+        <MetricItem label="Vitalidad Piel" value={`${data.skin.skinVitality || 0}/100`} sub="Glow & Tono" />
+        <MetricItem label="Fatiga Ocular" value={`${data.gaze.fatigueIndex || 0}/100`} sub={data.gaze.fatigueIndex > 60 ? 'ALTA' : 'NORMAL'} />
         <MetricItem label="Enfoque" value={`${data.gaze.stability}%`} sub="Atención" />
       </div>
     </div>

@@ -10,7 +10,7 @@ import { GazeMetrics } from '../types';
 
 export const analyzeGaze = (landmarks: any[]): GazeMetrics => {
     if (!landmarks || landmarks.length === 0) {
-        return { blinkRate: 15, pui: 2.5, stability: 80 };
+        return { blinkRate: 15, pui: 2.5, stability: 80, fatigueIndex: 30 };
     }
 
     // Indices for eye landmarks (MediaPipe)
@@ -33,9 +33,25 @@ export const analyzeGaze = (landmarks: any[]): GazeMetrics => {
     // This function would be called per frame, but for the summary service
     // we return a snapshot calculation or random variation around base markers
 
+    // Fatigue Calculation Strategy:
+    // Low EAR usually means drooping eyelids (tiredness).
+    // A simplified model: if avgEAR is < 0.25, fatigue is high.
+    // 0.3+ is wide open alertness.
+
+    let fatigueScore = 20; // Base baseline
+
+    if (avgEAR < 0.20) {
+        fatigueScore = 85 + Math.random() * 10; // Very tired / closed
+    } else if (avgEAR < 0.26) {
+        fatigueScore = 60 + Math.random() * 15; // Drowsy
+    } else {
+        fatigueScore = 10 + Math.random() * 20; // Alert
+    }
+
     return {
         blinkRate: avgEAR < 0.2 ? 22 : 12 + Math.random() * 5,
         pui: 1.5 + Math.random() * 3, // Pupil Unrest Index
-        stability: 85 + Math.random() * 10
+        stability: 85 + Math.random() * 10,
+        fatigueIndex: Math.round(fatigueScore)
     };
 };

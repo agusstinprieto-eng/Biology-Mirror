@@ -19,7 +19,7 @@ export const generatePDFReport = async (
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('times', 'bold');
-    doc.text('Espejo Neurosomático', 20, 22);
+    doc.text('Neurosomatic-mirror', 20, 22);
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
@@ -89,5 +89,5 @@ export const generatePDFReport = async (
 
     // Save the PDF
     const nameSlug = (post.userName || pre.userName || 'Usuario').replace(/\s+/g, '_');
-    doc.save(`Espejo_${nameSlug}_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
+    doc.save(`Neurosomatic-mirror_${nameSlug}_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
 };

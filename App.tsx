@@ -69,7 +69,7 @@ function App() {
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex items-center space-x-3 mb-12">
             <div className="w-12 h-12 bg-[#2d4a3e] rounded-full shadow-2xl border-2 border-white/20" />
-            <span className="text-4xl font-serif font-bold tracking-tight text-white drop-shadow-md">Espejo Neurosomático</span>
+            <span className="text-4xl font-serif font-bold tracking-tight text-white drop-shadow-md">Neurosomatic-mirror</span>
           </div>
           <div className="glass p-8 rounded-[2rem] shadow-2xl max-w-md w-full">
             <Auth />
@@ -89,7 +89,7 @@ function App() {
             onClick={() => setCurrentView('HOME')}
           >
             <div className="w-8 h-8 bg-[#2d4a3e] rounded-full shadow-inner" />
-            <span className="text-2xl font-serif font-bold tracking-tight text-neutral-900">Espejo Neurosomático</span>
+            <span className="text-2xl font-serif font-bold tracking-tight text-neutral-900">Neurosomatic-mirror</span>
           </div>
 
           <nav className="flex items-center space-x-8 text-sm font-medium text-neutral-500">
@@ -151,7 +151,7 @@ function App() {
                     <div className="absolute inset-0 bg-[#2d4a3e]/20 blur-[100px] rounded-full -z-10" />
                     <img
                       src="/hero-face.png"
-                      alt="Espejo Neurosomático Digital Reveal"
+                      alt="Neurosomatic-mirror Digital Reveal"
                       className="w-full h-auto drop-shadow-[0_35px_35px_rgba(45,74,62,0.3)] hover:scale-[1.02] transition-transform duration-700"
                     />
                   </div>
@@ -217,7 +217,7 @@ function App() {
 
       <footer className="p-12 border-t border-neutral-100 text-center bg-white">
         <p className="text-xs text-neutral-400 font-bold uppercase tracking-[0.4em]">
-          &copy; 2026 Espejo Neurosomático &bull; IA.AGUS
+          &copy; 2026 Neurosomatic-mirror &bull; IA.AGUS
         </p>
       </footer>
     </div>

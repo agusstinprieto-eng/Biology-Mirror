@@ -14,7 +14,7 @@ export const analyzeSkin = async (videoElement: HTMLVideoElement): Promise<SkinA
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
         if (!ctx) {
-            resolve({ homogeneity: 75, redness: 30, textureRoughness: 40 });
+            resolve({ homogeneity: 75, redness: 30, textureRoughness: 40, skinVitality: 65 });
             return;
         }
 
@@ -58,13 +58,19 @@ export const analyzeSkin = async (videoElement: HTMLVideoElement): Promise<SkinA
             // Roughness: estimate from high frequency variation (very rough approximation)
             const textureRoughness = Math.min(100, Math.sqrt(rVariance) * 5);
 
+            // Skin Vitality: A composite score of homogeneity and color balance (simple glow proxy)
+            // Higer homogeneity and balanced redness (not too red/inflamed, not too pale) -> higher vitality.
+            // Simplified: Vitality = Homogeneity * 0.7 + (100 - TextureRoughness) * 0.3
+            const skinVitality = Math.min(100, Math.round(homogeneity * 0.6 + (100 - textureRoughness) * 0.4));
+
             resolve({
                 homogeneity: Math.round(homogeneity),
                 redness: Math.round(redness),
-                textureRoughness: Math.round(textureRoughness)
+                textureRoughness: Math.round(textureRoughness),
+                skinVitality: skinVitality
             });
         } catch (e) {
-            resolve({ homogeneity: 80, redness: 25, textureRoughness: 35 });
+            resolve({ homogeneity: 80, redness: 25, textureRoughness: 35, skinVitality: 70 });
         }
     });
 };

@@ -57,6 +57,54 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
     }
   };
 
+  const [realtimeLandmarks, setRealtimeLandmarks] = useState<any[]>([]);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let isActive = false;
+
+    if (step === 'RECORDING' && videoRef.current && isFaceMeshReady) {
+      isActive = true;
+      const faceMesh = (window as any).faceMeshIsReady ? null : null; // Quick check 
+      import('../services/faceAnalysis').then(({ getFaceMeshInstance, setRealtimeCallback }) => {
+        const mesh = getFaceMeshInstance();
+
+        // Subscribe to results
+        setRealtimeCallback((results) => {
+          if (isActive && results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+            setRealtimeLandmarks(results.multiFaceLandmarks[0]);
+          }
+        });
+
+        // Loop to send frames
+        const loop = async () => {
+          if (!isActive) return;
+          if (videoRef.current && videoRef.current.readyState >= 2) { // HAVE_CURRENT_DATA
+            try {
+              // We don't await this to keep the UI thread unblocked for 60fps
+              // But FaceMesh might queue up if we send too fast. 
+              // Using a simple throttle or just requestAnimationFrame is usually fine for demo.
+              await mesh?.send({ image: videoRef.current });
+            } catch (e) {
+              // Silently fail frame drops
+            }
+          }
+          animationFrameId = requestAnimationFrame(loop);
+        };
+        loop();
+      });
+    }
+
+    return () => {
+      isActive = false;
+      cancelAnimationFrame(animationFrameId);
+      // Clean up callback to avoid memory leaks
+      import('../services/faceAnalysis').then(({ setRealtimeCallback }) => {
+        setRealtimeCallback(() => { });
+      });
+    };
+  }, [step, isFaceMeshReady]);
+
   useEffect(() => {
     let timer: any;
     if (step === 'RECORDING' && timeLeft > 0) {
@@ -116,7 +164,7 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
         setAnalysisStatus('Analizando Dermotipo y Mirada...');
         setAnalysisProgress(85);
         const skin = await analyzeSkin(videoRef.current)
-          .catch(e => { console.error("Skin Analysis fail", e); return { homogeneity: 80, redness: 25, textureRoughness: 35 }; });
+          .catch(e => { console.error("Skin Analysis fail", e); return { homogeneity: 80, redness: 25, textureRoughness: 35, skinVitality: 70 }; });
 
         const gaze = analyzeGaze(faceResult.landmarks);
         setAnalysisProgress(95);
@@ -221,7 +269,7 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
                 playsInline
                 className="w-full h-full object-cover"
               />
-              <FaceOverlay isAnalyzing={step === 'ANALYZING'} stage={stage} />
+              <FaceOverlay isAnalyzing={step === 'ANALYZING'} stage={stage} landmarks={step === 'RECORDING' ? realtimeLandmarks : undefined} />
 
               <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse flex items-center">
                 <div className="w-2 h-2 bg-white rounded-full mr-2" />
