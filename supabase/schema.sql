@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS public.sessions (
   skin JSONB NOT NULL,
   voice JSONB,
   transcript TEXT,
+  user_name TEXT,
   video_url TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

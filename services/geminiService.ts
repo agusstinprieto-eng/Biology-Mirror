@@ -66,9 +66,32 @@ export const analyzeTransformation = async (pre: SessionData, post?: SessionData
           throw new Error(`Respuesta vacía de ${modelName}`);
         }
 
-        const result = JSON.parse(text.trim());
-        console.log("Análisis completado exitosamente.");
-        return result;
+        console.log(`[DEBUG] Raw text from ${modelName}:`, text.substring(0, 200));
+
+        // Robust JSON extraction
+        let cleanText = text.trim();
+
+        // Remove markdown backticks if present
+        if (cleanText.includes('```')) {
+          const match = cleanText.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+          if (match) cleanText = match[1].trim();
+        }
+
+        // If it's still invalid or has trailing text (like the error suggests at pos 4)
+        // extract the FIRST valid JSON object/array
+        const firstObjectMatch = cleanText.match(/[\{\[]([\s\S]*)[\}\]]/);
+        if (firstObjectMatch) {
+          cleanText = firstObjectMatch[0];
+        }
+
+        try {
+          const result = JSON.parse(cleanText);
+          console.log("Análisis completado exitosamente.");
+          return result;
+        } catch (parseError) {
+          console.error(`[CRÍTICO] Fallo al parsear JSON de ${modelName}:`, cleanText);
+          throw new Error(`Error de formato en la respuesta de IA: ${parseError instanceof Error ? parseError.message : String(parseError)}`);
+        }
       } catch (error: any) {
         lastError = error;
         console.error(`Error con ${modelName} (intento ${attempt}):`, error.message || error);

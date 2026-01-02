@@ -15,6 +15,7 @@ export const saveSession = async (data: SessionData) => {
             gaze: data.gaze,
             skin: data.skin,
             transcript: data.transcript,
+            user_name: data.userName,
             timestamp: data.timestamp
         })
         .select()
