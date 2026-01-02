@@ -213,104 +213,113 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-neutral-100">
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-serif font-bold text-neutral-800">
-              {stage === 'PRE' ? 'Evaluación Inicial (Antes)' : 'Evaluación Final (Después)'}
-            </h2>
-            <div className={`px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-widest ${stage === 'PRE' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
-              Etapa: {stage}
-            </div>
+      <div className="glass rounded-none shadow-xl border border-white/10 p-8 relative overflow-hidden">
+        {/* Background accent */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--brand-primary)]/10 blur-[80px] rounded-full -mr-16 -mt-16 pointer-events-none" />
+
+        <div className="relative z-10 flex justify-between items-center mb-10">
+          <h2 className="text-2xl font-display font-bold text-white uppercase tracking-wider">
+            {stage === 'PRE' ? 'Evaluación Inicial' : 'Evaluación Final'}
+          </h2>
+          <div className={`px-4 py-1.5 border text-xs font-bold uppercase tracking-[0.2em] ${stage === 'PRE' ? 'border-[#c5a059] text-[#c5a059] bg-[#c5a059]/10' : 'border-[var(--brand-secondary)] text-[var(--brand-secondary)] bg-[var(--brand-secondary)]/10'}`}>
+            Etapa: {stage}
           </div>
+        </div>
 
-          {step === 'IDLE' && (
-            <div className="text-center py-10 space-y-6">
-              <div className="max-w-sm mx-auto space-y-4 text-left">
-                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-widest">Nombre del Participante</label>
-                <input
-                  type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Ingresa tu nombre..."
-                  className="w-full p-4 rounded-2xl bg-neutral-50 border border-neutral-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
-                />
-              </div>
-
-              <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto text-neutral-400">
-                {!isFaceMeshReady ? (
-                  <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                )}
-              </div>
-              <h3 className="text-xl font-medium text-neutral-700">
-                {isFaceMeshReady ? 'Comienza tu análisis neuro-somático' : 'Cargando modelos de IA...'}
-              </h3>
-              <p className="text-neutral-500 max-w-md mx-auto">
-                Grabaremos 15 segundos de video para extraer tus biomarcadores reales. Mantén una expresión natural y buena iluminación.
-              </p>
-              <button
-                onClick={startCamera}
-                disabled={!isFaceMeshReady}
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:bg-neutral-300 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-emerald-200"
-              >
-                {isFaceMeshReady ? 'Iniciar Captura' : 'Esperando...'}
-              </button>
-            </div>
-          )}
-
-          {(step === 'RECORDING' || step === 'ANALYZING') && (
-            <div className="relative aspect-video rounded-2xl bg-black overflow-hidden group shadow-2xl">
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                playsInline
-                className="w-full h-full object-cover"
+        {step === 'IDLE' && (
+          <div className="text-center py-10 space-y-8">
+            <div className="max-w-sm mx-auto space-y-4 text-left group">
+              <label className="block text-xs font-bold text-[var(--brand-secondary)] uppercase tracking-[0.2em] mb-2 group-focus-within:text-[var(--brand-accent)] transition-colors">Nombre del Participante</label>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Ingresa tu nombre..."
+                className="w-full py-3 bg-transparent border-b border-white/20 text-white placeholder-white/20 focus:outline-none focus:border-[var(--brand-accent)] transition-colors text-lg"
               />
-              <FaceOverlay isAnalyzing={step === 'ANALYZING'} stage={stage} landmarks={step === 'RECORDING' ? realtimeLandmarks : undefined} />
+            </div>
 
-              <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse flex items-center">
-                <div className="w-2 h-2 bg-white rounded-full mr-2" />
-                {step === 'RECORDING' ? `00:${timeLeft.toString().padStart(2, '0')}` : 'PROCESANDO BIOMARCADORES...'}
-              </div>
-
-              {step === 'ANALYZING' && (
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white p-8">
-                  <div className="w-full max-w-xs bg-white/20 h-1 rounded-full overflow-hidden mb-4">
-                    <div
-                      className="bg-[#2d4a3e] h-full transition-all duration-500 ease-out"
-                      style={{ width: `${analysisProgress}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-lg font-serif italic text-[#a7f3d0]">{analysisStatus}</p>
-                  <p className="text-xs opacity-60 mt-2 font-mono">NEURAL ENGINE PROCESSING • {analysisProgress}%</p>
-                </div>
+            <div className="w-24 h-24 bg-white/5 border border-white/10 rounded-none flex items-center justify-center mx-auto text-[var(--brand-secondary)]">
+              {!isFaceMeshReady ? (
+                <div className="w-8 h-8 border-2 border-[var(--brand-secondary)] border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <svg className="w-10 h-10 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
               )}
             </div>
-          )}
 
-          {step === 'TRANSCRIPT' && (
-            <div className="space-y-6">
-              <h3 className="text-xl font-medium text-neutral-800">¿Cómo te sientes en este momento?</h3>
-              <p className="text-sm text-neutral-500">Tus palabras proporcionan el contexto semántico necesario para el análisis de congruencia.</p>
-              <textarea
-                value={transcript}
-                onChange={(e) => setTranscript(e.target.value)}
-                placeholder="Describe brevemente tu estado interno..."
-                className="w-full h-32 p-4 rounded-2xl border border-neutral-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
-              />
-              <button
-                disabled={!transcript.trim()}
-                onClick={handleSubmit}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
-              >
-                Finalizar Registro
-              </button>
+            <div className="space-y-4">
+              <h3 className="text-xl font-display text-white">
+                {isFaceMeshReady ? 'Comienza tu análisis neuro-somático' : 'Cargando modelos de IA...'}
+              </h3>
+              <p className="text-[var(--brand-text)] max-w-md mx-auto font-light leading-relaxed">
+                Grabaremos 15 segundos de video para extraer tus biomarcadores reales. Mantén una expresión natural y buena iluminación.
+              </p>
             </div>
-          )}
-        </div>
+
+            <button
+              onClick={startCamera}
+              disabled={!isFaceMeshReady}
+              className="btn-primary px-10 py-4 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isFaceMeshReady ? 'Iniciar Captura' : 'Esperando...'}
+            </button>
+          </div>
+        )}
+
+        {(step === 'RECORDING' || step === 'ANALYZING') && (
+          <div className="relative aspect-video bg-black overflow-hidden group shadow-2xl border border-white/10">
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-full object-cover opacity-90"
+            />
+            <FaceOverlay isAnalyzing={step === 'ANALYZING'} stage={stage} landmarks={step === 'RECORDING' ? realtimeLandmarks : undefined} />
+
+            <div className="absolute top-6 right-6 bg-red-500/80 backdrop-blur text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest animate-pulse flex items-center">
+              <div className="w-2 h-2 bg-white rounded-full mr-3" />
+              {step === 'RECORDING' ? `Grabando: 00:${timeLeft.toString().padStart(2, '0')}` : 'Procesando...'}
+            </div>
+
+            {step === 'ANALYZING' && (
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center text-white p-12 text-center">
+                <div className="w-full max-w-md bg-white/10 h-0.5 mb-8">
+                  <div
+                    className="bg-[var(--brand-secondary)] h-full transition-all duration-500 ease-out box-shadow-[0_0_20px_var(--brand-secondary)]"
+                    style={{ width: `${analysisProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-2xl font-display text-white mb-2">{analysisStatus}</p>
+                <p className="text-[10px] text-[var(--brand-secondary)] uppercase tracking-[0.3em] font-mono">Neural Engine Processing • {Math.round(analysisProgress)}%</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {step === 'TRANSCRIPT' && (
+          <div className="space-y-8 py-4">
+            <div className="space-y-2">
+              <h3 className="text-2xl font-display text-white">¿Cómo te sientes en este momento?</h3>
+              <p className="text-[var(--brand-text)] font-light">Tus palabras proporcionan el contexto semántico necesario para el análisis de congruencia.</p>
+            </div>
+
+            <textarea
+              value={transcript}
+              onChange={(e) => setTranscript(e.target.value)}
+              placeholder="Describe brevemente tu estado interno (físico, emocional, mental)..."
+              className="w-full h-40 p-6 bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[var(--brand-secondary)] transition-all resize-none font-light"
+            />
+
+            <button
+              disabled={!transcript.trim()}
+              onClick={handleSubmit}
+              className="btn-primary w-full py-5 text-lg disabled:opacity-50"
+            >
+              Finalizar Registro
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

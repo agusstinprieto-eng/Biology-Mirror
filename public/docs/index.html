@@ -6,27 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neurosomatic-mirror | Documentación de Negocios</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --forest: #2d4a3e;
-            --gold: #c5a059;
-            --cream: #fcfaf7;
-            --dark: #1a1a1a;
+            --forest: #2B3326;
+            --moss: #707A59;
+            --gold: #D6B384;
+            --accent: #EA492E;
+            --cream: #E8E6E6;
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
-            color: white;
+            font-family: 'Lato', sans-serif;
+            background-color: var(--forest);
+            color: var(--cream);
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-image: radial-gradient(circle at top right, rgba(45, 74, 62, 0.3), transparent),
-                radial-gradient(circle at bottom left, rgba(197, 160, 89, 0.1), transparent);
+            background-image:
+                radial-gradient(circle at top right, rgba(112, 122, 89, 0.2), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(214, 179, 132, 0.1), transparent 40%);
         }
 
         .container {
@@ -34,21 +36,21 @@
             width: 90%;
             text-align: center;
             padding: 4rem;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(43, 51, 38, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px border rgba(255, 255, 255, 0.1);
-            border-radius: 4rem;
+            border: 1px solid rgba(214, 179, 132, 0.1);
+            border-radius: 0;
+            /* Sharp corners per design */
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            background: linear-gradient(to bottom, #fff, #a7f3d0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
@@ -70,24 +72,27 @@
             align-items: center;
             justify-content: space-between;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 2rem;
+            background: transparent;
+            border-radius: 0;
             text-decoration: none;
             color: white;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .menu-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--gold);
+            transform: translateX(10px);
+            background: var(--moss);
+            border-color: var(--moss);
         }
 
         .menu-item h3 {
             margin: 0;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .menu-item p {

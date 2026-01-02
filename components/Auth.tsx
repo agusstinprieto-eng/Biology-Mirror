@@ -29,31 +29,31 @@ export const Auth: React.FC = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-12 bg-white rounded-[3rem] shadow-2xl border border-neutral-100 mt-20">
-            <h2 className="text-3xl font-serif font-bold text-neutral-800 mb-2">
-                {isSignUp ? 'Crea tu Cuenta' : 'Bienvenido de nuevo'}
+        <div className="max-w-md mx-auto p-12 glass rounded-none shadow-2xl mt-20 text-center">
+            <h2 className="text-3xl font-display font-bold text-white mb-2 uppercase tracking-widest">
+                {isSignUp ? 'Unirse al Círculo' : 'Acceso Miembro'}
             </h2>
-            <p className="text-neutral-500 mb-8">Ingresa tus datos para acceder a Neurosomatic-mirror.</p>
+            <p className="text-neutral-400 mb-8 text-sm tracking-wide">Ingresa tus credenciales de acceso.</p>
 
-            <form onSubmit={handleAuth} className="space-y-6">
-                <div>
-                    <label className="block text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">Email</label>
+            <form onSubmit={handleAuth} className="space-y-8 text-left">
+                <div className="group">
+                    <label className="block text-xs font-bold text-[var(--brand-secondary)] uppercase tracking-[0.2em] mb-2 group-focus-within:text-[var(--brand-accent)] transition-colors">Email</label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-4 rounded-2xl bg-neutral-50 border border-neutral-100 focus:ring-2 focus:ring-emerald-500 outline-none"
+                        className="w-full py-3 bg-transparent border-b border-white/20 text-white placeholder-white/20 focus:outline-none focus:border-[var(--brand-accent)] transition-colors"
                         placeholder="tu@email.com"
                         required
                     />
                 </div>
-                <div>
-                    <label className="block text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">Contraseña</label>
+                <div className="group">
+                    <label className="block text-xs font-bold text-[var(--brand-secondary)] uppercase tracking-[0.2em] mb-2 group-focus-within:text-[var(--brand-accent)] transition-colors">Contraseña</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-4 rounded-2xl bg-neutral-50 border border-neutral-100 focus:ring-2 focus:ring-emerald-500 outline-none"
+                        className="w-full py-3 bg-transparent border-b border-white/20 text-white placeholder-white/20 focus:outline-none focus:border-[var(--brand-accent)] transition-colors"
                         placeholder="••••••••"
                         required
                     />
@@ -61,7 +61,7 @@ export const Auth: React.FC = () => {
 
                 <button
                     disabled={loading}
-                    className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-xl hover:bg-emerald-700 transition-all disabled:opacity-50"
+                    className="btn-primary w-full disabled:opacity-50"
                 >
                     {loading ? 'Procesando...' : isSignUp ? 'Registrarse' : 'Iniciar Sesión'}
                 </button>
@@ -70,9 +70,9 @@ export const Auth: React.FC = () => {
             <div className="mt-8 text-center">
                 <button
                     onClick={() => setIsSignUp(!isSignUp)}
-                    className="text-sm text-emerald-600 font-medium hover:underline"
+                    className="text-xs text-neutral-500 hover:text-white uppercase tracking-widest transition-colors"
                 >
-                    {isSignUp ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate'}
+                    {isSignUp ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Registrate'}
                 </button>
             </div>
         </div>

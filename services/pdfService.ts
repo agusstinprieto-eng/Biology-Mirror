@@ -59,9 +59,10 @@ export const generatePDFReport = async (
         head: [['BIOMARCADOR', 'ANTES (ESTRÉS)', 'DESPUÉS (SANACIÓN)', 'CAMBIO']],
         body: [
             ['VFC (HRV)', `${pre.bio.hrv}ms`, `${post.bio.hrv}ms`, `${(post.bio.hrv - pre.bio.hrv).toFixed(1)}ms`],
+            ['Vitalidad Piel', `${pre.skin.skinVitality || 0}/100`, `${post.skin.skinVitality || 0}/100`, `${((post.skin.skinVitality || 0) - (pre.skin.skinVitality || 0)).toFixed(0)}`],
+            ['Fatiga Ocular', `${pre.gaze.fatigueIndex || 0}/100`, `${post.gaze.fatigueIndex || 0}/100`, `${((post.gaze.fatigueIndex || 0) - (pre.gaze.fatigueIndex || 0)).toFixed(0)}`],
             ['Ritmo Cardiaco', `${pre.bio.heartRate} bpm`, `${post.bio.heartRate} bpm`, `${(post.bio.heartRate - pre.bio.heartRate).toFixed(1)} bpm`],
             ['Frec. Respiratoria', `${pre.bio.respirationRate.toFixed(1)}`, `${post.bio.respirationRate.toFixed(1)}`, `${(post.bio.respirationRate - pre.bio.respirationRate).toFixed(1)}`],
-            ['Homogeneidad Piel', `${pre.skin.homogeneity}%`, `${post.skin.homogeneity}%`, `${(post.skin.homogeneity - pre.skin.homogeneity).toFixed(1)}%`],
             ['Estabilidad Mirada', `${pre.gaze.stability}%`, `${post.gaze.stability}%`, `${(post.gaze.stability - pre.gaze.stability).toFixed(1)}%`],
         ],
         headStyles: { fillColor: primaryColor },

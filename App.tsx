@@ -80,27 +80,27 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-[#F9FAF9]">
+    <div className="min-h-screen flex flex-col font-sans bg-[var(--brand-bg)] text-[var(--brand-text)] selection:bg-[var(--brand-accent)] selection:text-white">
       {/* Navigation / Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-100 px-8 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--brand-bg)]/80 backdrop-blur-md border-b border-white/5 px-8 py-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center w-full">
           <div
-            className="flex items-center space-x-3 cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer group"
             onClick={() => setCurrentView('HOME')}
           >
-            <div className="w-8 h-8 bg-[#2d4a3e] rounded-full shadow-inner" />
-            <span className="text-2xl font-serif font-bold tracking-tight text-neutral-900">Neurosomatic-mirror</span>
+            <div className="w-10 h-10 bg-[var(--brand-secondary)] rounded-none shadow-inner group-hover:bg-white transition-colors duration-500" />
+            <span className="text-2xl font-display font-bold tracking-tight text-white uppercase group-hover:text-[var(--brand-secondary)] transition-colors">Neurosomatic</span>
           </div>
 
-          <nav className="flex items-center space-x-8 text-sm font-medium text-neutral-500">
+          <nav className="flex items-center space-x-8 text-sm font-bold text-neutral-400 tracking-widest uppercase">
             <button
               onClick={() => setCurrentView('HOME')}
-              className={`hover:text-emerald-600 transition-colors ${currentView === 'HOME' ? 'text-emerald-600' : ''}`}
+              className={`hover:text-white transition-colors ${currentView === 'HOME' ? 'text-white border-b border-[var(--brand-accent)]' : ''}`}
             >
               Inicio
             </button>
             <button
-              className="bg-neutral-900 text-white px-5 py-2 rounded-full hover:bg-neutral-800 transition-all text-xs"
+              className="btn-ghost px-6 py-2 text-xs"
               onClick={() => supabase.auth.signOut()}
             >
               Cerrar Sesión
@@ -124,54 +124,60 @@ function App() {
 
             <div className="relative z-10 max-w-7xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
-                <div className="text-left space-y-10">
-                  <div className="inline-flex items-center space-x-2 bg-[#2d4a3e]/10 text-[#2d4a3e] px-6 py-2 rounded-full border border-[#2d4a3e]/20 text-xs font-bold uppercase tracking-[0.2em]">
+                <div className="text-left space-y-10 animate-in fade-in slide-in-from-left-8 duration-1000">
+                  <div className="inline-flex items-center space-x-2 bg-white/5 text-[var(--brand-secondary)] px-6 py-2 border border-[var(--brand-secondary)] text-xs font-bold uppercase tracking-[0.2em]">
                     Sanctuary Edition • v2.0
                   </div>
-                  <h1 className="text-7xl md:text-8xl xl:text-9xl font-serif font-bold text-neutral-900 leading-[0.9] tracking-tighter">
+                  <h1 className="text-7xl md:text-8xl xl:text-9xl font-display text-white leading-[0.9] tracking-tighter drop-shadow-2xl">
                     Tu esencia, <br />
-                    <span className="text-[#2d4a3e] italic">reflejada.</span>
+                    <span className="text-[var(--brand-primary)] italic">reflejada.</span>
                   </h1>
-                  <p className="text-2xl text-stone-600 max-w-xl leading-relaxed font-light italic">
+                  <p className="text-2xl text-[var(--brand-text)] max-w-xl leading-relaxed font-light opacity-90">
                     Un viaje introspectivo donde la tecnología de montaña decodifica tu estado biológico y emocional.
                   </p>
-                  <div className="pt-4 flex justify-start">
+                  <div className="pt-8 flex justify-start gap-4">
                     <button
                       onClick={() => setCurrentView('PRE_CHECKIN')}
-                      className="bg-[#2d4a3e] text-white px-16 py-6 rounded-full font-bold shadow-2xl hover:bg-[#1e332a] transition-all transform hover:-translate-y-1 text-xl flex items-center space-x-3"
+                      className="btn-primary flex items-center space-x-3 text-xl"
                     >
                       <span>Comenzar Evaluación</span>
                       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </button>
+                    <button
+                      className="btn-ghost flex items-center space-x-3"
+                      onClick={() => window.open('/docs/index.html', '_blank')}
+                    >
+                      <span>Leer Manifiesto</span>
                     </button>
                   </div>
                 </div>
 
                 <div className="relative flex justify-center lg:justify-end animate-in fade-in slide-in-from-right-8 duration-1000">
                   <div className="relative w-full max-w-[450px]">
-                    <div className="absolute inset-0 bg-[#2d4a3e]/20 blur-[100px] rounded-full -z-10" />
+                    <div className="absolute inset-0 bg-[var(--brand-primary)] blur-[120px] rounded-full -z-10 opacity-40" />
                     <img
                       src="/hero-face.png"
                       alt="Neurosomatic-mirror Digital Reveal"
-                      className="w-full h-auto drop-shadow-[0_35px_35px_rgba(45,74,62,0.3)] hover:scale-[1.02] transition-transform duration-700"
+                      className="w-full h-auto drop-shadow-2xl hover:scale-[1.02] transition-transform duration-700 grayscale hover:grayscale-0"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 pt-12">
+              <div className="grid md:grid-cols-3 gap-8 pt-20 border-t border-white/10">
                 <FeatureCard
                   title="FACS Pro"
-                  desc="Micro-gestos decodificados mediante Teoría Polivagal, identificando cúmulos de estrés en AU4 (entrecejo) y AU17 (mentón)."
+                  desc="Micro-gestos decodificados mediante Teoría Polivagal."
                   icon="🏔️"
                 />
                 <FeatureCard
                   title="rPPG Biomarkers"
-                  desc="Medimos tu HRV para evaluar el 'Freno Vagal' y la resiliencia de tu sistema nervioso autónomo sin contacto físico."
+                  desc="Evaluación de resiliencia del sistema nervioso autónomo."
                   icon="🌿"
                 />
                 <FeatureCard
                   title="Narrativa de Paz"
-                  desc="El Dr. Alara integra tus biomarcadores con una narrativa neuro-semántica para validar tu transformación cortical profunda."
+                  desc="Integración de biomarcadores con semántica de sanación."
                   icon="✨"
                 />
               </div>
@@ -225,10 +231,10 @@ function App() {
 }
 
 const FeatureCard: React.FC<{ title: string, desc: string, icon: string }> = ({ title, desc, icon }) => (
-  <div className="glass p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all group hover:-translate-y-2">
-    <div className="text-5xl mb-6 group-hover:scale-110 transition-transform inline-block drop-shadow-md">{icon}</div>
-    <h3 className="text-2xl font-serif font-bold text-[#2d4a3e] mb-4">{title}</h3>
-    <p className="text-stone-600 leading-relaxed font-light">{desc}</p>
+  <div className="glass p-10 rounded-none border-l-2 border-[var(--brand-secondary)] hover:border-[var(--brand-accent)] transition-all group hover:-translate-y-2">
+    <div className="text-5xl mb-6 group-hover:scale-110 transition-transform inline-block drop-shadow-md grayscale group-hover:grayscale-0">{icon}</div>
+    <h3 className="text-2xl font-display font-bold text-white mb-4 group-hover:text-[var(--brand-secondary)] transition-colors">{title}</h3>
+    <p className="text-neutral-400 leading-relaxed font-light">{desc}</p>
   </div>
 );
 

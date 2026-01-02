@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch de Venta | Neurosomatic-mirror</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --forest: #2d4a3e;
-            --gold: #c5a059;
-            --cream: #fcfaf7;
-            --dark: #0a0c0b;
+            --forest: #2B3326;
+            --moss: #707A59;
+            --gold: #D6B384;
+            --accent: #EA492E;
+            --cream: #E8E6E6;
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
+            font-family: 'Lato', sans-serif;
+            background-color: var(--forest);
             color: #d1d1d1;
             line-height: 1.6;
         }
@@ -60,11 +61,12 @@
         }
 
         .hero-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 4.5rem;
             color: white;
             margin-bottom: 1rem;
-            font-style: italic;
+            font-style: normal;
+            letter-spacing: -0.02em;
         }
 
         .hero-subtitle {
@@ -73,29 +75,13 @@
             color: var(--gold);
             font-weight: 300;
             letter-spacing: 0.1em;
+            font-family: 'Raleway', sans-serif;
         }
 
-        section {
-            padding: 8rem 10%;
-        }
-
-        .problem-section {
-            background-color: white;
-            color: var(--dark);
-        }
-
-        .section-tag {
-            color: var(--gold);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            font-size: 0.7rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
+        /* ... */
 
         h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 3rem;
             margin-bottom: 2rem;
             color: var(--forest);
@@ -103,38 +89,29 @@
 
         .grid {
             display: grid;
-            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 4rem;
         }
 
         .card {
             padding: 2.5rem;
-            background: var(--cream);
-            border-radius: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0;
             border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .solution-section {
-            background-color: var(--forest);
-            color: white;
-        }
-
-        .solution-section h2 {
-            color: white;
         }
 
         .stat {
             font-size: 4rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             color: var(--gold);
             display: block;
         }
 
         .cta {
             background: var(--gold);
-            color: var(--dark);
+            color: var(--forest);
             padding: 1.5rem 3rem;
-            border-radius: 4rem;
+            border-radius: 0;
             text-decoration: none;
             font-weight: 700;
             text-transform: uppercase;

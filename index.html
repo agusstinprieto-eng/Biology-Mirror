@@ -7,33 +7,93 @@
   <title>Neurosomatic-mirror</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --brand-bg: #fcfaf7;
-      --brand-primary: #2d4a3e;
-      --brand-secondary: #4a6b8a;
-      --brand-accent: #c5a059;
-      --brand-text: #1a1a1a;
-      --brand-surface: rgba(255, 255, 255, 0.7);
+      /* Palette from centrodetransformacion.org */
+      --brand-bg: #2B3326;
+      /* Deep Forest Green */
+      --brand-primary: #707A59;
+      /* Moss Green */
+      --brand-secondary: #D6B384;
+      /* Sand/Wood */
+      --brand-accent: #EA492E;
+      /* Terracotta */
+      --brand-text: #E8E6E6;
+      /* Off-white */
+      --brand-dark: #1a1a1a;
+
+      --font-display: 'Cinzel', serif;
+      /* Closest Google Font to 'Against' */
+      --font-heading: 'Raleway', sans-serif;
+      --font-body: 'Lato', sans-serif;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       background-color: var(--brand-bg);
       color: var(--brand-text);
+      line-height: 1.6;
     }
 
-    .font-serif {
-      font-family: 'Playfair Display', serif;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-heading);
+    }
+
+    .font-display {
+      font-family: var(--font-display);
     }
 
     .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(43, 51, 38, 0.7);
+      /* Green glass */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(214, 179, 132, 0.2);
+      /* Sand border */
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border-radius: 0px;
+      /* Sharp corners */
+    }
+
+    .btn-ghost:hover {
+      background: white;
+      color: var(--brand-bg);
+    }
+
+    .btn-primary {
+      background: var(--brand-accent);
+      color: white;
+      padding: 0.75rem 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      border: none;
+      border-radius: 0px;
+      /* Sharp corners */
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(234, 73, 46, 0.4);
     }
 
     @keyframes pulse-soft {

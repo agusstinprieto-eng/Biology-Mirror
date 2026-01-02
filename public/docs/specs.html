@@ -6,22 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Especificaciones Técnicas | Neurosomatic-mirror</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --forest: #2d4a3e;
-            --gold: #c5a059;
-            --slate: #4a6b8a;
-            --dark: #0f1715;
+            --forest: #2B3326;
+            --moss: #707A59;
+            --gold: #D6B384;
+            --accent: #EA492E;
+            --cream: #E8E6E6;
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
+            font-family: 'Lato', sans-serif;
+            background-color: var(--forest);
             color: #d1d1d1;
             line-height: 1.8;
+            background-image:
+                radial-gradient(circle at top right, rgba(112, 122, 89, 0.2), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(214, 179, 132, 0.1), transparent 40%);
         }
 
         .nav {
@@ -53,7 +57,7 @@
         }
 
         .header-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 4rem;
             color: white;
             margin-bottom: 3rem;
@@ -61,25 +65,30 @@
 
         .tech-grid {
             display: grid;
-            grid-template-cols: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
             margin-bottom: 6rem;
         }
 
         .tech-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(43, 51, 38, 0.6);
+            border: 1px solid rgba(214, 179, 132, 0.1);
             padding: 3rem;
-            border-radius: 3rem;
-            transition: border-color 0.3s;
+            border-radius: 0;
+            transition: all 0.3s;
         }
 
         .tech-box:hover {
             border-color: var(--gold);
+            transform: translateY(-5px);
+            background: rgba(112, 122, 89, 0.2);
         }
 
         .tech-box h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: white;
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
@@ -175,7 +184,7 @@
 
 <body>
     <nav class="nav">
-        <div style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: white;">
+        <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: white;">
             Neurosomatic-mirror</div>
         <div style="display: flex; gap: 1rem; align-items: center;">
             <a href="https://neurosomatic-mirror.vercel.app" target="_blank">Ver App ↗</a>
