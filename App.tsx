@@ -59,7 +59,7 @@ function App() {
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex items-center space-x-2 mb-12">
             <div className="w-10 h-10 bg-emerald-600 rounded-full shadow-lg" />
-            <span className="text-3xl font-serif font-bold tracking-tight text-neutral-800">NeuroSoma</span>
+            <span className="text-3xl font-serif font-bold tracking-tight text-neutral-800">Biology Mirror</span>
           </div>
           <Auth />
         </div>
@@ -77,7 +77,7 @@ function App() {
             onClick={() => setCurrentView('HOME')}
           >
             <div className="w-8 h-8 bg-emerald-600 rounded-full" />
-            <span className="text-xl font-serif font-bold tracking-tight text-neutral-800">NeuroSoma</span>
+            <span className="text-xl font-serif font-bold tracking-tight text-neutral-800">Biology Mirror</span>
           </div>
 
           <nav className="flex items-center space-x-8 text-sm font-medium text-neutral-500">
@@ -102,7 +102,7 @@ function App() {
           <div className="max-w-5xl mx-auto space-y-24">
             <div className="text-center space-y-8 py-12">
               <div className="inline-flex items-center space-x-2 bg-emerald-600/5 text-emerald-700 px-6 py-2 rounded-full border border-emerald-600/10 text-xs font-bold uppercase tracking-[0.2em] mb-4">
-                NeuroSoma Core 2.0
+                Biology Mirror Core 2.0
               </div>
               <h1 className="text-6xl md:text-8xl font-serif font-bold text-neutral-900 leading-none tracking-tighter">
                 Haz visible tu <br />
@@ -179,7 +179,7 @@ function App() {
 
       <footer className="p-12 border-t border-neutral-100 text-center bg-white">
         <p className="text-xs text-neutral-400 font-bold uppercase tracking-[0.4em]">
-          &copy; 2026 NeuroSoma &bull; Advanced Bio-Phenotyping Lab
+          &copy; 2026 Biology Mirror &bull; Advanced Bio-Phenotyping Lab
         </p>
       </footer>
     </div>
