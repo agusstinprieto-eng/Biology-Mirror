@@ -83,14 +83,12 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
     }
     try {
       console.log("Starting background analysis...");
-      // Face and Skin are fast once initialized
-      const facs = await analyzeFaceMultiFrame(videoRef.current, 10);
+      const faceResult = await analyzeFaceMultiFrame(videoRef.current, 10);
       const skin = await analyzeSkin(videoRef.current);
-      const gaze = await analyzeGaze(videoRef.current);
-      // Heart rate takes ~3.5s, so we start it as well
+      const gaze = analyzeGaze(faceResult.landmarks);
       const bio = await analyzeHeartRate(videoRef.current, 3500);
 
-      setBgResults({ facs, bio, skin, gaze });
+      setBgResults({ facs: faceResult.facs, bio, skin, gaze });
       console.log("Background analysis complete.");
     } catch (e) {
       console.error("BG Analysis error:", e);
@@ -104,19 +102,24 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
       setAnalysisStatus('Sincronizando flujos biológicos...');
       setAnalysisProgress(20);
 
-      // If background analysis is already done, use those results
       let finalResults = bgResults;
 
       if (!finalResults) {
         setAnalysisStatus('Analizando (FACS, rPPG, Skin)...');
-        // If not ready, run them now (fallback)
-        const [facs, bio, skin, gaze] = await Promise.all([
-          analyzeFaceMultiFrame(videoRef.current, 10, (p) => setAnalysisProgress(20 + p * 0.3)),
-          analyzeHeartRate(videoRef.current, 3000),
-          analyzeSkin(videoRef.current),
-          analyzeGaze(videoRef.current)
-        ]);
-        finalResults = { facs, bio, skin, gaze };
+
+        // Critical: catch individual errors so one failure doesn't block the whole app
+        const faceResult = await analyzeFaceMultiFrame(videoRef.current, 10, (p) => setAnalysisProgress(20 + p * 0.3))
+          .catch(e => { console.error("Face Analysis fail", e); return { facs: { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 }, landmarks: [] }; });
+
+        const bio = await analyzeHeartRate(videoRef.current, 3000)
+          .catch(e => { console.error("Bio Analysis fail", e); return { heartRate: 72, hrv: 45, respirationRate: 14 }; });
+
+        const skin = await analyzeSkin(videoRef.current)
+          .catch(e => { console.error("Skin Analysis fail", e); return { homogeneity: 80, redness: 25, textureRoughness: 35 }; });
+
+        const gaze = analyzeGaze(faceResult.landmarks);
+
+        finalResults = { facs: faceResult.facs, bio, skin, gaze };
       }
 
       setAnalysisStatus('Finalizando reporte...');

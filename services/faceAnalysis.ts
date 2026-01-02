@@ -7,7 +7,11 @@ let sharedCanvas: HTMLCanvasElement | null = null;
 let sharedCtx: CanvasRenderingContext2D | null = null;
 let activeResolve: ((results: any) => void) | null = null;
 
-// Initialize MediaPipe Face Mesh
+export interface FaceAnalysisResult {
+    facs: FACSVector;
+    landmarks: any[];
+}
+
 export const initializeFaceMesh = (): Promise<void> => {
     return new Promise((resolve, reject) => {
         if (faceMesh) {
@@ -15,7 +19,6 @@ export const initializeFaceMesh = (): Promise<void> => {
             return;
         }
 
-        console.log("Initializing MediaPipe FaceMesh...");
         faceMesh = new FaceMesh({
             locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
         });
@@ -34,52 +37,38 @@ export const initializeFaceMesh = (): Promise<void> => {
             }
         });
 
-        faceMesh.initialize().then(() => {
-            console.log("FaceMesh initialized.");
-            resolve();
-        }).catch(reject);
+        faceMesh.initialize().then(() => resolve()).catch(reject);
     });
 };
 
-const calculateDistance = (p1: [number, number, number], p2: [number, number, number]): number => {
-    const dx = p1[0] - p2[0];
-    const dy = p1[1] - p2[1];
-    const dz = p1[2] - p2[2];
-    return Math.sqrt(dx * dx + dy * dy + dz * dz);
+const calculateDistance = (p1: any, p2: any): number => {
+    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
 };
 
 const calculateFACS = (landmarks: any[]): FACSVector => {
-    const p = (i: number): [number, number, number] => [landmarks[i].x, landmarks[i].y, landmarks[i].z];
+    const p = (i: number) => landmarks[i];
 
-    // AU1: Inner Brow Raiser
     const leftBrowEyeDist = calculateDistance(p(66), p(159));
     const rightBrowEyeDist = calculateDistance(p(296), p(386));
     const AU1 = ((leftBrowEyeDist + rightBrowEyeDist) / 2) * 100;
 
-    // AU4: Brow Lowerer
-    const browHeight = ((landmarks[107].y + landmarks[336].y) / 2);
+    const browHeight = ((p(107).y + p(336).y) / 2);
     const AU4 = Math.max(0, (1 - browHeight) * 10);
 
-    // AU6: Cheek Raiser
     const eyeSquint = 1 - ((calculateDistance(p(159), p(145)) + calculateDistance(p(386), p(374))) / 2);
     const AU6 = eyeSquint * 10;
 
-    // AU12: Lip Corner Puller
     const mouthWidth = calculateDistance(p(61), p(291));
     const AU12 = mouthWidth * 50;
 
-    // AU15: Lip Corner Depressor
-    const cornerDrop = (landmarks[61].y + landmarks[291].y) / 2;
+    const cornerDrop = (p(61).y + p(291).y) / 2;
     const AU15 = Math.max(0, cornerDrop * 10);
 
-    // AU17: Chin Raiser
-    const AU17 = Math.max(0, (1 - landmarks[152].y) * 10);
+    const AU17 = Math.max(0, (1 - p(152).y) * 10);
 
-    // AU20: Lip Stretcher
     const lipStretch = mouthWidth / calculateDistance(p(13), p(14));
     const AU20 = Math.min(5, lipStretch * 2);
 
-    // AU24: Lip Pressor
     const lipDistance = calculateDistance(p(13), p(14));
     const AU24 = Math.max(0, (0.1 - lipDistance) * 50);
 
@@ -89,7 +78,7 @@ const calculateFACS = (landmarks: any[]): FACSVector => {
     };
 };
 
-export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSVector> => {
+export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FaceAnalysisResult> => {
     if (!faceMesh) await initializeFaceMesh();
 
     if (!sharedCanvas) {
@@ -99,12 +88,18 @@ export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSV
 
     return new Promise((resolve) => {
         const timeout = setTimeout(() => {
-            resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
-        }, 1000);
+            resolve({
+                facs: { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 },
+                landmarks: []
+            });
+        }, 1500);
 
         if (videoElement.videoWidth === 0 || videoElement.videoHeight === 0) {
-            console.warn("Skipping frame with 0 dimensions");
-            resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
+            clearTimeout(timeout);
+            resolve({
+                facs: { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 },
+                landmarks: []
+            });
             return;
         }
 
@@ -115,13 +110,20 @@ export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSV
         activeResolve = (results) => {
             clearTimeout(timeout);
             if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
-                resolve(calculateFACS(results.multiFaceLandmarks[0]));
+                const landmarks = results.multiFaceLandmarks[0];
+                resolve({
+                    facs: calculateFACS(landmarks),
+                    landmarks
+                });
             } else {
-                resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
+                resolve({
+                    facs: { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 },
+                    landmarks: []
+                });
             }
         };
 
-        faceMesh!.send({ image: videoElement });
+        faceMesh!.send({ image: sharedCanvas! }); // Use canvas, not video, for stability
     });
 };
 
@@ -129,21 +131,27 @@ export const analyzeFaceMultiFrame = async (
     videoElement: HTMLVideoElement,
     numFrames: number = 10,
     onProgress?: (progress: number) => void
-): Promise<FACSVector> => {
+): Promise<FaceAnalysisResult> => {
     const results: FACSVector[] = [];
+    let lastLandmarks: any[] = [];
+
     for (let i = 0; i < numFrames; i++) {
         try {
-            const facs = await analyzeFace(videoElement);
+            const { facs, landmarks } = await analyzeFace(videoElement);
             results.push(facs);
+            if (landmarks.length > 0) lastLandmarks = landmarks;
+
             if (onProgress) onProgress(Math.round(((i + 1) / numFrames) * 100));
-            // Don't wait too long
             if (i % 3 === 0) await new Promise(resolve => requestAnimationFrame(resolve));
         } catch (error) {
             console.error('Error analyzing frame:', error);
         }
     }
-    if (results.length === 0) return { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 };
-    return {
+
+    const defaultFacs = { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 };
+    if (results.length === 0) return { facs: defaultFacs, landmarks: [] };
+
+    const averagedFacs = {
         AU1: results.reduce((sum, r) => sum + r.AU1, 0) / results.length,
         AU4: results.reduce((sum, r) => sum + r.AU4, 0) / results.length,
         AU6: results.reduce((sum, r) => sum + r.AU6, 0) / results.length,
@@ -153,4 +161,6 @@ export const analyzeFaceMultiFrame = async (
         AU20: results.reduce((sum, r) => sum + r.AU20, 0) / results.length,
         AU24: results.reduce((sum, r) => sum + r.AU24, 0) / results.length
     };
+
+    return { facs: averagedFacs, landmarks: lastLandmarks };
 };
