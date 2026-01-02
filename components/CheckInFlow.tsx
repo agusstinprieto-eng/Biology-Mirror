@@ -19,6 +19,7 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
   const [isFaceMeshReady, setIsFaceMeshReady] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const [analysisStatus, setAnalysisStatus] = useState('');
+  const [bgResults, setBgResults] = useState<{ facs?: any, bio?: any, skin?: any, gaze?: any } | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -49,58 +50,84 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
   useEffect(() => {
     let timer: any;
     if (step === 'RECORDING' && timeLeft > 0) {
-      timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+      timer = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev === 5) {
+            // Trigger pre-emptive analysis 5 seconds before end
+            runBackgroundAnalysis();
+          }
+          return prev - 1;
+        });
+      }, 1000);
     } else if (step === 'RECORDING' && timeLeft === 0) {
       setStep('ANALYZING');
-      // We don't stop camera yet because we might need it for analysis
+      handleAnalysis();
     }
     return () => clearInterval(timer);
   }, [step, timeLeft]);
 
-  useEffect(() => {
-    if (step === 'ANALYZING') {
-      performRealAnalysis();
-    }
-  }, [step]);
+  const runBackgroundAnalysis = async () => {
+    if (!videoRef.current) return;
+    try {
+      console.log("Starting background analysis...");
+      // Face and Skin are fast once initialized
+      const facs = await analyzeFaceMultiFrame(videoRef.current, 10);
+      const skin = await analyzeSkin(videoRef.current);
+      const gaze = await analyzeGaze(videoRef.current);
+      // Heart rate takes ~3.5s, so we start it as well
+      const bio = await analyzeHeartRate(videoRef.current, 3500);
 
-  const performRealAnalysis = async () => {
+      setBgResults({ facs, bio, skin, gaze });
+      console.log("Background analysis complete.");
+    } catch (e) {
+      console.error("BG Analysis error:", e);
+    }
+  };
+
+  const handleAnalysis = async () => {
     if (!videoRef.current) return;
 
     try {
-      setAnalysisStatus('Leyendo micro-gestos (FACS)...');
-      const facs = await analyzeFaceMultiFrame(videoRef.current, 15, (p) => {
-        setAnalysisProgress(Math.round(p * 0.4)); // FACS represents first 40%
-      });
+      setAnalysisStatus('Sincronizando flujos biológicos...');
+      setAnalysisProgress(20);
 
-      setAnalysisStatus('Capturando pulso biológico (rPPG)...');
-      const bio = await analyzeHeartRate(videoRef.current, 3500); // Reduced to 3.5s for speed
-      setAnalysisProgress(80);
+      // If background analysis is already done, use those results
+      let finalResults = bgResults;
 
-      setAnalysisStatus('Analizando textura de piel...');
-      const skin = await analyzeSkin(videoRef.current);
+      if (!finalResults) {
+        setAnalysisStatus('Analizando (FACS, rPPG, Skin)...');
+        // If not ready, run them now (fallback)
+        const [facs, bio, skin, gaze] = await Promise.all([
+          analyzeFaceMultiFrame(videoRef.current, 10, (p) => setAnalysisProgress(20 + p * 0.3)),
+          analyzeHeartRate(videoRef.current, 3000),
+          analyzeSkin(videoRef.current),
+          analyzeGaze(videoRef.current)
+        ]);
+        finalResults = { facs, bio, skin, gaze };
+      }
+
+      setAnalysisStatus('Finalizando reporte...');
       setAnalysisProgress(100);
 
-      setAnalysisStatus('Finalizando mapeo...');
-      await new Promise(resolve => setTimeout(resolve, 500)); // Brief pause for UX
-
-      const gaze = analyzeGaze([]);
-
-      const sessionData: SessionData = {
-        facs,
-        bio,
-        skin,
-        gaze,
-        transcript: '',
+      const session: SessionData = {
+        userId: 'temp-user', // Placeholder, replace with actual user ID
         timestamp: new Date().toISOString(),
-        stage
+        stage,
+        facs: finalResults.facs!,
+        bio: finalResults.bio!,
+        skin: finalResults.skin!,
+        gaze: finalResults.gaze!,
+        transcript: '', // Will be filled in the next step
+        videoUrl: '#' // Placeholder, replace with actual video URL if recorded
       };
 
-      (window as any).tempSessionData = sessionData;
+      // Store session data temporarily for the transcript step
+      (window as any).tempSessionData = session;
 
       setStep('TRANSCRIPT');
       stopCamera();
     } catch (error) {
-      console.error("Analysis failed:", error);
+      console.error('Analysis failed:', error);
       alert("La captura falló. Por favor intenta de nuevo.");
       setStep('IDLE');
       stopCamera();
