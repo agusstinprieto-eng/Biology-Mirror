@@ -89,7 +89,7 @@ function App() {
             onClick={() => setCurrentView('HOME')}
           >
             <div className="w-10 h-10 bg-[var(--brand-secondary)] rounded-none shadow-inner group-hover:bg-white transition-colors duration-500" />
-            <span className="text-2xl font-display font-bold tracking-tight text-white uppercase group-hover:text-[var(--brand-secondary)] transition-colors">Neurosomatic</span>
+            <span className="text-2xl font-display font-bold tracking-tight text-white uppercase group-hover:text-[var(--brand-secondary)] transition-colors">Espejo-Neurosomático</span>
           </div>
 
           <nav className="flex items-center space-x-8 text-sm font-bold text-neutral-400 tracking-widest uppercase">
@@ -109,16 +109,14 @@ function App() {
         </div>
       </header>
 
-      <main className="flex-1 pt-32 pb-12 px-6">
+      {/* Main Content */}
+      <main className="flex-grow pt-24 pb-12 px-8 z-10">
         {currentView === 'HOME' && (
-          <div className="relative">
-            {/* Hero Background for Logged in User */}
-            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-screen h-[70vh] z-0 overflow-hidden">
-              <img
-                src="/mountain-bg.png"
-                alt="Mountain background"
-                className="w-full h-full object-cover opacity-20 blur-sm"
-              />
+          <div className="relative isolate pt-14">
+            <div
+              className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80 pointer-events-none"
+              aria-hidden="true"
+            >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#fcfaf7]" />
             </div>
 
@@ -157,7 +155,7 @@ function App() {
                     <div className="absolute inset-0 bg-[var(--brand-primary)] blur-[120px] rounded-full -z-10 opacity-40" />
                     <img
                       src="/hero-face.png"
-                      alt="Neurosomatic-mirror Digital Reveal"
+                      alt="Espejo-Neurosomático Digital Reveal"
                       className="w-full h-auto drop-shadow-2xl hover:scale-[1.02] transition-transform duration-700 grayscale hover:grayscale-0"
                     />
                   </div>
