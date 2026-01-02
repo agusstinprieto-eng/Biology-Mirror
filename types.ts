@@ -43,6 +43,7 @@ export interface VoiceMetrics {
 export interface SessionData {
   id?: string;
   userId?: string;
+  userName?: string;
   facs: FACSVector;
   bio: BioMetrics;
   gaze: GazeMetrics;

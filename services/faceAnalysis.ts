@@ -102,6 +102,12 @@ export const analyzeFace = async (videoElement: HTMLVideoElement): Promise<FACSV
             resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
         }, 1000);
 
+        if (videoElement.videoWidth === 0 || videoElement.videoHeight === 0) {
+            console.warn("Skipping frame with 0 dimensions");
+            resolve({ AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 });
+            return;
+        }
+
         sharedCanvas!.width = videoElement.videoWidth;
         sharedCanvas!.height = videoElement.videoHeight;
         sharedCtx!.drawImage(videoElement, 0, 0);

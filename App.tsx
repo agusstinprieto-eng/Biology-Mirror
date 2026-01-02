@@ -161,17 +161,17 @@ function App() {
               <div className="grid md:grid-cols-3 gap-8 pt-12">
                 <FeatureCard
                   title="FACS Pro"
-                  desc="Micro-gestos decodificados en el aire puro, midiendo tu relajación profunda."
+                  desc="Micro-gestos decodificados mediante Teoría Polivagal, identificando cúmulos de estrés en AU4 (entrecejo) y AU17 (mentón)."
                   icon="🏔️"
                 />
                 <FeatureCard
                   title="rPPG Biomarkers"
-                  desc="Tu corazón late al ritmo de la montaña. Medimos tu HRV sin contacto físico."
+                  desc="Medimos tu HRV para evaluar el 'Freno Vagal' y la resiliencia de tu sistema nervioso autónomo sin contacto físico."
                   icon="🌿"
                 />
                 <FeatureCard
                   title="Narrativa de Paz"
-                  desc="El Dr. Alara traduce tu biología en un lenguaje de serenidad y autoconocimiento."
+                  desc="El Dr. Alara integra tus biomarcadores con una narrativa neuro-semántica para validar tu transformación cortical profunda."
                   icon="✨"
                 />
               </div>

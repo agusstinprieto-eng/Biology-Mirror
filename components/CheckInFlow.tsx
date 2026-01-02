@@ -14,6 +14,7 @@ interface CheckInFlowProps {
 
 export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) => {
   const [step, setStep] = useState<'IDLE' | 'RECORDING' | 'ANALYZING' | 'TRANSCRIPT'>('IDLE');
+  const [userName, setUserName] = useState('');
   const [timeLeft, setTimeLeft] = useState(15);
   const [transcript, setTranscript] = useState('');
   const [isFaceMeshReady, setIsFaceMeshReady] = useState(false);
@@ -28,11 +29,20 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
   }, []);
 
   const startCamera = async () => {
+    if (!userName.trim()) {
+      alert("Por favor ingresa tu nombre para el reporte.");
+      return;
+    }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
+
+        // Ensure video is playing and has dimensions before continuing
+        videoRef.current.onloadedmetadata = () => {
+          videoRef.current?.play();
+        };
       }
       setStep('RECORDING');
       setTimeLeft(15);
@@ -67,7 +77,10 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
   }, [step, timeLeft]);
 
   const runBackgroundAnalysis = async () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || videoRef.current.videoWidth === 0) {
+      console.warn("Delaying BG analysis: video not ready");
+      return;
+    }
     try {
       console.log("Starting background analysis...");
       // Face and Skin are fast once initialized
@@ -110,15 +123,16 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
       setAnalysisProgress(100);
 
       const session: SessionData = {
-        userId: 'temp-user', // Placeholder, replace with actual user ID
+        userId: userName,
+        userName: userName,
         timestamp: new Date().toISOString(),
         stage,
         facs: finalResults.facs!,
         bio: finalResults.bio!,
         skin: finalResults.skin!,
         gaze: finalResults.gaze!,
-        transcript: '', // Will be filled in the next step
-        videoUrl: '#' // Placeholder, replace with actual video URL if recorded
+        transcript: '',
+        videoUrl: '#'
       };
 
       // Store session data temporarily for the transcript step
@@ -158,7 +172,18 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
           </div>
 
           {step === 'IDLE' && (
-            <div className="text-center py-20 space-y-6">
+            <div className="text-center py-10 space-y-6">
+              <div className="max-w-sm mx-auto space-y-4 text-left">
+                <label className="block text-xs font-bold text-neutral-400 uppercase tracking-widest">Nombre del Participante</label>
+                <input
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  placeholder="Ingresa tu nombre..."
+                  className="w-full p-4 rounded-2xl bg-neutral-50 border border-neutral-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+                />
+              </div>
+
               <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto text-neutral-400">
                 {!isFaceMeshReady ? (
                   <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
