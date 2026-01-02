@@ -57,8 +57,8 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-12 space-y-8">
         <div className="relative w-24 h-24">
-          <div className="absolute inset-0 border-4 border-emerald-100 rounded-full" />
-          <div className="absolute inset-0 border-4 border-emerald-600 rounded-full border-t-transparent animate-spin" />
+          <div className="absolute inset-0 border-4 border-stone-100 rounded-full" />
+          <div className="absolute inset-0 border-4 border-[#2d4a3e] rounded-full border-t-transparent animate-spin" />
         </div>
         <div className="space-y-2">
           <h2 className="text-2xl font-serif text-neutral-800">Sintetizando tu Transformación</h2>
@@ -74,25 +74,25 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
     <div className="max-w-7xl mx-auto p-6 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-neutral-900 rounded-[3rem] p-12 text-white shadow-2xl">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/20 blur-[120px] rounded-full -mr-20 -mt-20" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 blur-[100px] rounded-full -ml-10 -mb-10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#2d4a3e]/30 blur-[120px] rounded-full -mr-20 -mt-20" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#4a6b8a]/10 blur-[100px] rounded-full -ml-10 -mb-10" />
 
         <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 px-4 py-1.5 rounded-full border border-emerald-500/20 text-xs font-bold uppercase tracking-widest">
-              <span>Bio-Análisis Completado</span>
-              <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+            <div className="inline-flex items-center space-x-2 bg-[#2d4a3e]/10 text-[#4ade80] px-4 py-1.5 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest">
+              <span>Bio-Análisis Portal</span>
+              <div className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse" />
             </div>
             <h1 className="text-5xl md:text-6xl font-serif font-bold leading-tight">
               Tu Espejo <br />
-              <span className="text-emerald-400 italic">Neuro-Somático</span>
+              <span className="text-[#a7f3d0] italic">de la Montaña</span>
             </h1>
             <p className="text-xl text-neutral-400 leading-relaxed font-light">
               "{report.keyShift}"
             </p>
             <div className="pt-4 flex space-x-6 items-center">
               <div className="text-center">
-                <div className="text-5xl font-bold text-emerald-400">{report.neuroScore}</div>
+                <div className="text-5xl font-bold text-white">{report.neuroScore}</div>
                 <div className="text-[10px] font-bold text-neutral-500 uppercase tracking-tighter">NeuroScore</div>
               </div>
               <div className="h-12 w-px bg-neutral-800" />
@@ -108,8 +108,8 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
 
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-8">
-          <div className="bg-white rounded-[2.5rem] p-10 shadow-xl border border-neutral-100">
-            <h3 className="text-2xl font-serif font-bold text-neutral-800 mb-8 border-b border-neutral-50 pb-6">Análisis Clínico del Dr. Alara</h3>
+          <div className="glass rounded-[2.5rem] p-10 shadow-xl border border-white/20">
+            <h3 className="text-2xl font-serif font-bold text-neutral-800 mb-8 border-b border-stone-200 pb-6">Análisis del Dr. Alara: Medicina de Montaña</h3>
             <div className="space-y-6 text-neutral-600 leading-relaxed text-lg italic">
               {report.detailedAnalysis.split('\n\n').map((para, i) => (
                 <p key={i}>{para}</p>
@@ -120,12 +120,12 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
           {/* Metrics Comparison */}
           <div className="grid md:grid-cols-2 gap-8">
             <MetricCard label="Estado Pre-Retiro" data={pre} theme="amber" />
-            <MetricCard label="Estado Post-Retiro" data={post} theme="emerald" />
+            <MetricCard label="Estado Post-Retiro" data={post} theme="forest" />
           </div>
         </div>
 
         <div className="space-y-8">
-          <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-neutral-100">
+          <div className="glass rounded-[2.5rem] p-8 shadow-xl border border-white/20">
             <FacsRadarChart pre={pre.facs} post={post.facs} />
           </div>
 
@@ -134,7 +134,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
             <ul className="space-y-5">
               {report.visualCues.map((cue, i) => (
                 <li key={i} className="flex items-start text-sm group">
-                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-1.5 mr-4 flex-shrink-0 group-hover:scale-150 transition-transform" />
+                  <span className="w-1.5 h-1.5 bg-[#c5a059] rounded-full mt-1.5 mr-4 flex-shrink-0 group-hover:scale-150 transition-transform" />
                   <span className="text-neutral-300 group-hover:text-white transition-colors">{cue}</span>
                 </li>
               ))}
@@ -149,7 +149,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
         <button
           onClick={handleDownload}
           disabled={downloading}
-          className="bg-emerald-600 text-white px-10 py-4 rounded-full font-bold shadow-2xl hover:bg-emerald-700 transition-all transform hover:-translate-y-1 disabled:opacity-50"
+          className="bg-[#2d4a3e] text-white px-10 py-4 rounded-full font-bold shadow-2xl hover:bg-[#1e332a] transition-all transform hover:-translate-y-1 disabled:opacity-50"
         >
           {downloading ? 'Generando PDF...' : 'Descargar Reporte Completo (PDF)'}
         </button>
@@ -158,11 +158,11 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
   );
 };
 
-const MetricCard: React.FC<{ label: string, data: SessionData, theme: 'amber' | 'emerald' }> = ({ label, data, theme }) => {
+const MetricCard: React.FC<{ label: string, data: SessionData, theme: 'amber' | 'forest' }> = ({ label, data, theme }) => {
   const isPre = theme === 'amber';
   return (
-    <div className={`bg-white rounded-3xl p-8 shadow-lg border-t-8 ${isPre ? 'border-amber-400' : 'border-emerald-400'} transition-transform hover:scale-[1.02]`}>
-      <h3 className={`text-lg font-bold mb-8 uppercase tracking-widest ${isPre ? 'text-amber-700' : 'text-emerald-700'}`}>{label}</h3>
+    <div className={`glass rounded-3xl p-8 shadow-lg border-t-8 ${isPre ? 'border-[#c5a059]' : 'border-[#2d4a3e]'} transition-transform hover:scale-[1.02]`}>
+      <h3 className={`text-lg font-bold mb-8 uppercase tracking-widest ${isPre ? 'text-[#c5a059]' : 'text-[#2d4a3e]'}`}>{label}</h3>
       <div className="grid grid-cols-2 gap-8">
         <MetricItem label="HRV (VFC)" value={`${data.bio.hrv}ms`} sub="Resiliencia" />
         <MetricItem label="Ritmo Cardíaco" value={`${data.bio.heartRate} BPM`} sub="Carga" />
@@ -177,6 +177,6 @@ const MetricItem: React.FC<{ label: string, value: string, sub: string }> = ({ l
   <div className="space-y-1">
     <div className="text-[10px] text-neutral-400 uppercase font-bold tracking-widest">{label}</div>
     <div className="text-3xl font-serif text-neutral-800">{value}</div>
-    <div className="text-[10px] text-emerald-600/60 font-medium">{sub}</div>
+    <div className="text-[10px] text-[#2d4a3e]/60 font-medium">{sub}</div>
   </div>
 );

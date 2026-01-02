@@ -55,13 +55,25 @@ function App() {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-[#F9FAF9] py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="flex items-center space-x-2 mb-12">
-            <div className="w-10 h-10 bg-emerald-600 rounded-full shadow-lg" />
-            <span className="text-3xl font-serif font-bold tracking-tight text-neutral-800">Biology Mirror</span>
+      <div className="min-h-screen relative flex items-center justify-center py-12 px-6 overflow-hidden">
+        {/* Background Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/mountain-bg.png"
+            alt="Mountain Sanctuary"
+            className="w-full h-full object-cover scale-105 animate-pulse-soft"
+          />
+          <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px]" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
+          <div className="flex items-center space-x-3 mb-12">
+            <div className="w-12 h-12 bg-[#2d4a3e] rounded-full shadow-2xl border-2 border-white/20" />
+            <span className="text-4xl font-serif font-bold tracking-tight text-white drop-shadow-md">Biology Mirror</span>
           </div>
-          <Auth />
+          <div className="glass p-8 rounded-[2rem] shadow-2xl max-w-md w-full">
+            <Auth />
+          </div>
         </div>
       </div>
     );
@@ -73,11 +85,11 @@ function App() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-100 px-8 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center w-full">
           <div
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer"
             onClick={() => setCurrentView('HOME')}
           >
-            <div className="w-8 h-8 bg-emerald-600 rounded-full" />
-            <span className="text-xl font-serif font-bold tracking-tight text-neutral-800">Biology Mirror</span>
+            <div className="w-8 h-8 bg-[#2d4a3e] rounded-full shadow-inner" />
+            <span className="text-2xl font-serif font-bold tracking-tight text-neutral-900">Biology Mirror</span>
           </div>
 
           <nav className="flex items-center space-x-8 text-sm font-medium text-neutral-500">
@@ -99,44 +111,57 @@ function App() {
 
       <main className="flex-1 pt-32 pb-12 px-6">
         {currentView === 'HOME' && (
-          <div className="max-w-5xl mx-auto space-y-24">
-            <div className="text-center space-y-8 py-12">
-              <div className="inline-flex items-center space-x-2 bg-emerald-600/5 text-emerald-700 px-6 py-2 rounded-full border border-emerald-600/10 text-xs font-bold uppercase tracking-[0.2em] mb-4">
-                Biology Mirror Core 2.0
-              </div>
-              <h1 className="text-6xl md:text-8xl font-serif font-bold text-neutral-900 leading-none tracking-tighter">
-                Haz visible tu <br />
-                <span className="text-emerald-600 italic">sanación.</span>
-              </h1>
-              <p className="text-2xl text-neutral-500 max-w-3xl mx-auto leading-relaxed font-light italic">
-                La ciencia de la transformación invisible, ahora decodificada en tiempo real mediante biomarcadores digitales.
-              </p>
-              <div className="pt-8 flex justify-center space-x-6">
-                <button
-                  onClick={() => setCurrentView('PRE_CHECKIN')}
-                  className="bg-emerald-600 text-white px-12 py-5 rounded-full font-bold shadow-2xl hover:bg-emerald-700 transition-all transform hover:-translate-y-1 text-lg"
-                >
-                  Comenzar Evaluación
-                </button>
-              </div>
+          <div className="relative">
+            {/* Hero Background for Logged in User */}
+            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-screen h-[70vh] z-0 overflow-hidden">
+              <img
+                src="/mountain-bg.png"
+                alt="Mountain background"
+                className="w-full h-full object-cover opacity-20 blur-sm"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#fcfaf7]" />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-12 pt-12">
-              <FeatureCard
-                title="FACS Pro"
-                desc="Nuestro motor MediaPipe analiza micro-expresiones de tensión y relajación en milisegundos."
-                icon="👁️"
-              />
-              <FeatureCard
-                title="rPPG Biomarkers"
-                desc="Extraemos tu HRV y pulso directamente desde el color de tu piel, sin dispositivos externos."
-                icon="❤️"
-              />
-              <FeatureCard
-                title="Clínica Digital"
-                desc="IA Dr. Alara sintetiza tus cambios biológicos en una narrativa de sanación profunda."
-                icon="🧠"
-              />
+            <div className="relative z-10 max-w-5xl mx-auto space-y-24">
+              <div className="text-center space-y-8 py-12">
+                <div className="inline-flex items-center space-x-2 bg-[#2d4a3e]/10 text-[#2d4a3e] px-6 py-2 rounded-full border border-[#2d4a3e]/20 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                  Sanctuary Edition • v2.0
+                </div>
+                <h1 className="text-7xl md:text-9xl font-serif font-bold text-neutral-900 leading-none tracking-tighter">
+                  Tu esencia, <br />
+                  <span className="text-[#2d4a3e] italic">reflejada.</span>
+                </h1>
+                <p className="text-2xl text-stone-600 max-w-3xl mx-auto leading-relaxed font-light italic">
+                  Un viaje introspectivo donde la tecnología de montaña decodifica tu estado biológico y emocional.
+                </p>
+                <div className="pt-8 flex justify-center">
+                  <button
+                    onClick={() => setCurrentView('PRE_CHECKIN')}
+                    className="bg-[#2d4a3e] text-white px-16 py-6 rounded-full font-bold shadow-2xl hover:bg-[#1e332a] transition-all transform hover:-translate-y-1 text-xl flex items-center space-x-3"
+                  >
+                    <span>Comenzar Evaluación</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8 pt-12">
+                <FeatureCard
+                  title="FACS Pro"
+                  desc="Micro-gestos decodificados en el aire puro, midiendo tu relajación profunda."
+                  icon="🏔️"
+                />
+                <FeatureCard
+                  title="rPPG Biomarkers"
+                  desc="Tu corazón late al ritmo de la montaña. Medimos tu HRV sin contacto físico."
+                  icon="🌿"
+                />
+                <FeatureCard
+                  title="Narrativa de Paz"
+                  desc="El Dr. Alara traduce tu biología en un lenguaje de serenidad y autoconocimiento."
+                  icon="✨"
+                />
+              </div>
             </div>
           </div>
         )}
@@ -146,17 +171,17 @@ function App() {
         )}
 
         {currentView === 'PROGRESS' && (
-          <div className="max-w-2xl mx-auto text-center space-y-12 py-20 bg-white rounded-[3rem] p-12 shadow-xl border border-neutral-100">
+          <div className="max-w-2xl mx-auto text-center space-y-12 py-20 glass rounded-[3rem] p-12 shadow-2xl border border-white/40">
             <div className="relative w-32 h-32 mx-auto">
-              <div className="absolute inset-0 bg-emerald-100 rounded-full animate-ping opacity-25" />
-              <div className="relative w-full h-full bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 border border-emerald-100">
+              <div className="absolute inset-0 bg-[#2d4a3e]/10 rounded-full animate-ping opacity-25" />
+              <div className="relative w-full h-full bg-[#2d4a3e]/5 rounded-full flex items-center justify-center text-[#2d4a3e] border border-[#2d4a3e]/10">
                 <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
               </div>
             </div>
             <div className="space-y-4">
               <h2 className="text-4xl font-serif font-bold text-neutral-800">Mapeo inicial completado.</h2>
-              <p className="text-xl text-neutral-500 leading-relaxed font-light px-8">
-                Tus biomarcadores base han sido registrados. Es momento de vivir tu proceso. Al regresar, volveremos a medirte.
+              <p className="text-xl text-stone-600 leading-relaxed font-light px-8">
+                Tus biomarcadores base del retiro han sido registrados. Es momento de sumergirte en la montaña.
               </p>
             </div>
             <button
@@ -187,10 +212,10 @@ function App() {
 }
 
 const FeatureCard: React.FC<{ title: string, desc: string, icon: string }> = ({ title, desc, icon }) => (
-  <div className="bg-white p-10 rounded-[2.5rem] border border-neutral-100 shadow-sm hover:shadow-2xl transition-all group hover:-translate-y-2">
-    <div className="text-4xl mb-6 group-hover:scale-110 transition-transform inline-block">{icon}</div>
-    <h3 className="text-xl font-serif font-bold text-neutral-800 mb-4">{title}</h3>
-    <p className="text-neutral-500 leading-relaxed font-light">{desc}</p>
+  <div className="glass p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all group hover:-translate-y-2">
+    <div className="text-5xl mb-6 group-hover:scale-110 transition-transform inline-block drop-shadow-md">{icon}</div>
+    <h3 className="text-2xl font-serif font-bold text-[#2d4a3e] mb-4">{title}</h3>
+    <p className="text-stone-600 leading-relaxed font-light">{desc}</p>
   </div>
 );
 
