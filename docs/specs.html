@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especificaciones Técnicas | Biology Mirror</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --forest: #2d4a3e;
+            --gold: #c5a059;
+            --slate: #4a6b8a;
+            --dark: #0f1715;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: #d1d1d1;
+            line-height: 1.8;
+        }
+
+        .nav {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(15, 23, 21, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .content {
+            padding: 8rem 10% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .tech-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 3rem;
+            transition: border-color 0.3s;
+        }
+
+        .tech-box:hover {
+            border-color: var(--gold);
+        }
+
+        .tech-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tech-box h3::before {
+            content: '';
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            background: var(--gold);
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #a7f3d0;
+            font-weight: bold;
+        }
+
+        .security-banner {
+            background: linear-gradient(45deg, var(--forest), #1a332a);
+            padding: 4rem;
+            border-radius: 4rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 6rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            color: var(--gold);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: white;">Biology
+            Mirror</div>
+        <a href="index.html">← Menú</a>
+    </nav>
+
+    <div class="content">
+        <h1 class="header-title">Arquitectura del <br><span style="color: var(--gold); font-style: italic;">Fenotipado
+                Digital</span></h1>
+
+        <div class="tech-grid">
+            <div class="tech-box">
+                <span class="label">Visión Computacional</span>
+                <h3>rPPG & Señalización</h3>
+                <p>Extracción de signos vitales mediante fotopletismografía remota. Analizamos cambios de luminiscencia
+                    en la piel imperceptibles para el ojo humano.</p>
+                <ul class="feature-list">
+                    <li>Detección de flujo sanguíneo microvascular</li>
+                    <li>Frecuencia cardíaca (+/- 2 bpm de precisión)</li>
+                    <li>Variabilidad de Frecuencia Cardíaca (RMSSD)</li>
+                    <li>Monitoreo de frecuencia respiratoria sub-dérmica</li>
+                </ul>
+            </div>
+
+            <div class="tech-box">
+                <span class="label">Psicología Somática</span>
+                <h3>FACS & Micro-expresiones</h3>
+                <p>Implementación del Facial Action Coding System para mapear estados afectivos y tensión muscular
+                    facial.</p>
+                <ul class="feature-list">
+                    <li>Seguimiento de 468 puntos de referencia</li>
+                    <li>Detección de Unidad de Acción (AU) en tiempo real</li>
+                    <li>Cálculo de asimetría por estrés cortical</li>
+                    <li>Análisis de estabilidad de mirada y parpadeo</li>
+                </ul>
+            </div>
+
+            <div class="tech-box">
+                <span class="label">Cognitivo / AI</span>
+                <h3>Hybrid Gemini Engine</h3>
+                <p>Nuestra lógica de IA procesa biomarcadores crudos y los correlaciona con contexto semántico mediante
+                    modelos multimodales.</p>
+                <ul class="feature-list">
+                    <li>Gemini 1.5 Flash para procesamiento de baja latencia</li>
+                    <li>Dual-model redundancy para alta disponibilidad</li>
+                    <li>Generación de insights clínicos empáticos</li>
+                    <li>Correlación de transcriptores de audio con bio-datos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="security-banner">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Seguridad S-Tier
+                & Privacidad</h2>
+            <p style="max-width: 800px; margin: 0 auto 2rem; opacity: 0.8;">
+                Utilizamos infraestructura Supabase con cifrado AES-256 en reposo y TLS 1.3 en tránsito. Ninguna imagen
+                de video original sale del navegador del usuario; solo se transmiten vectores de datos anonimizados.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 3rem;">
+                <div><strong style="display: block; font-size: 1.5rem;">HIPAA</strong> Compliance Ready</div>
+                <div><strong style="display: block; font-size: 1.5rem;">GDPR</strong> Privacy First</div>
+                <div><strong style="display: block; font-size: 1.5rem;">SSL</strong> Secure Channel</div>
+            </div>
+        </div>
+
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Benchmarking de
+            Rendimiento</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Métrica</th>
+                    <th>Especificación</th>
+                    <th>Tecnología Base</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Latencia de Detección</td>
+                    <td>
+                        < 120ms</td>
+                    <td>MediaPipe WASM</td>
+                </tr>
+                <tr>
+                    <td>Resolución Requerida</td>
+                    <td>720p (30fps)</td>
+                    <td>WebRTC / HTML5</td>
+                </tr>
+                <tr>
+                    <td>Consumo de Datos</td>
+                    <td>~1.2MB por sesión</td>
+                    <td>Vector Storage</td>
+                </tr>
+                <tr>
+                    <td>Tiempo de Análisis AI</td>
+                    <td>
+                        < 4 segundos</td>
+                    <td>Gemini Serverless</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Genetic Mirror AI | Biology Mirror Core V2.4</p>
+    </footer>
+</body>
+
+</html>

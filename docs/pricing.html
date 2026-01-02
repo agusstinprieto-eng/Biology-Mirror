@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios y Licenciamiento | Biology Mirror</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --forest: #2d4a3e;
+            --gold: #c5a059;
+            --cream: #fcfaf7;
+            --dark: #0a0c0b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .nav {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(252, 250, 247, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav a {
+            color: var(--forest);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .container {
+            padding: 10rem 5% 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--forest);
+            margin-bottom: 1rem;
+        }
+
+        .header-desc {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 6rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .price-card {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 4rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card.featured {
+            background: var(--forest);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 40px 80px rgba(45, 74, 62, 0.2);
+            border: none;
+        }
+
+        .price-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .price span {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .features li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .features li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .price-card.featured .features li::before {
+            color: #a7f3d0;
+        }
+
+        .btn {
+            display: block;
+            padding: 1.5rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: opacity 0.3s;
+        }
+
+        .price-card.featured .btn {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .white-label-banner {
+            background: var(--dark);
+            color: white;
+            padding: 6rem;
+            border-radius: 5rem;
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            text-align: left;
+            align-items: center;
+        }
+
+        footer {
+            padding: 8rem 0 4rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: var(--forest);">
+            Biology Mirror</div>
+        <a href="index.html">← Menú</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="header-title">Planes y Licencias</h1>
+        <p class="header-desc">Impulsa tu centro de bienestar con validación biológica de vanguardia. Precios diseñados
+            para crecer contigo.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Starter</h3>
+                <div class="price">$199<span>/mes</span></div>
+                <p>Ideal para terapeutas individuales y consultores de salud.</p>
+                <ul class="features">
+                    <li>Hasta 50 escaneos/mes</li>
+                    <li>Análisis rPPG y FACS básicos</li>
+                    <li>Reportes PDF con marca estándar</li>
+                    <li>Dashboard de 1 usuario</li>
+                </ul>
+                <a href="#" class="btn">Comenzar</a>
+            </div>
+
+            <div class="price-card featured">
+                <h3>Professional</h3>
+                <div class="price">$599<span>/mes</span></div>
+                <p>Nuestra opción favorita para centros de retiro y resorts de lujo.</p>
+                <ul class="features">
+                    <li>Escaneos Ilimitados</li>
+                    <li>Dr. Alara AI (Insights Avanzados)</li>
+                    <li>Reportes PDF Personalizados</li>
+                    <li>Dashboard Multi-usuario</li>
+                    <li>Soporte Prioritario 24/7</li>
+                </ul>
+                <a href="#" class="btn">Mejores Funciones</a>
+            </div>
+
+            <div class="price-card">
+                <h3>Enterprise</h3>
+                <div class="price">Custom</div>
+                <p>Para grandes cadenas de hospitales y centros de investigación.</p>
+                <ul class="features">
+                    <li>Acceso completo a la API</li>
+                    <li>On-premise Deployment</li>
+                    <li>SLA de nivel bancario</li>
+                    <li>Formación para equipos</li>
+                </ul>
+                <a href="#" class="btn">Contactar Ventas</a>
+            </div>
+        </div>
+
+        <div class="white-label-banner">
+            <div>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1.5rem;">White-Label
+                    Solution</h2>
+                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">
+                    ¿Quieres tu propia App de Fenotipado Digital bajo tu marca? Ofrecemos personalización total de
+                    colores, logos e integración de dominio propio.
+                </p>
+                <a href="mailto:ventas@biology-mirror.com"
+                    style="color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 5px;">Consultar
+                    Presupuesto White-label</a>
+            </div>
+            <div
+                style="text-align: right; font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-style: italic;">
+                "Tu marca, <br> nuestra tecnología secreta."
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Genetic Mirror AI | Todos los precios expresados en USD.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

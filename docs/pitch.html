@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch de Venta | Biology Mirror</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --forest: #2d4a3e;
+            --gold: #c5a059;
+            --cream: #fcfaf7;
+            --dark: #0a0c0b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: #d1d1d1;
+            line-height: 1.6;
+        }
+
+        .nav {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(10, 12, 11, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 600px;
+            color: var(--gold);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        section {
+            padding: 8rem 10%;
+        }
+
+        .problem-section {
+            background-color: white;
+            color: var(--dark);
+        }
+
+        .section-tag {
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            font-size: 0.7rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--forest);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .card {
+            padding: 2.5rem;
+            background: var(--cream);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .solution-section {
+            background-color: var(--forest);
+            color: white;
+        }
+
+        .solution-section h2 {
+            color: white;
+        }
+
+        .stat {
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            display: block;
+        }
+
+        .cta {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 1.5rem 3rem;
+            border-radius: 4rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 3rem;
+            transition: transform 0.3s;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 4rem 10%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: white;">Biology
+            Mirror</div>
+        <a href="index.html">← Menú</a>
+    </nav>
+
+    <header>
+        <div class="section-tag">Presentación de Retorno Biológico</div>
+        <h1 class="hero-title">Validando lo Invisible</h1>
+        <p class="hero-subtitle">Convertimos la sanación mental en evidencia biológica medible a través del Fenotipado
+            Digital.</p>
+    </header>
+
+    <section class="problem-section">
+        <span class="section-tag">El Problema</span>
+        <h2>La Ceguera Biológica</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="stat">78%</span>
+                <p>De los clientes en retiros de bienestar vuelven al burnout en menos de 15 días porque no tienen una
+                    validación tangible de sus cambios psicológicos.</p>
+            </div>
+            <div class="card">
+                <span class="stat">0%</span>
+                <p>Visibilidad científica en la mayoría de las terapias alternativas. Los facilitadores dependen de la
+                    intuición subjetiva del paciente.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <span class="section-tag">La Solución</span>
+        <h2 style="font-style: italic;">Biology Mirror: El Espejo de la Montaña</h2>
+        <p style="font-size: 1.5rem; max-width: 800px; margin-bottom: 4rem; font-weight: 300;">
+            Utilizando inteligencia artificial multimodal y tecnología rPPG de grado clínico, capturamos el ritmo
+            cardíaco, la variabilidad (HRV) y las micro-expresiones faciales (FACS) sin ningún contacto físico.
+        </p>
+        <div class="grid">
+            <div>
+                <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem;">Análisis Sin
+                    Contacto</h3>
+                <p>Nuestra tecnología transforma cualquier cámara de smartphone o laptop en un sensor biomédico
+                    avanzado.</p>
+            </div>
+            <div>
+                <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem;">El Dr. Alara
+                    AI</h3>
+                <p>Interpretación instantánea de los datos mediante una IA experta en medicina somática y neurobiología.
+                </p>
+            </div>
+            <div>
+                <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem;">Evidencia de
+                    Cambio</h3>
+                <p>Generamos un reporte PRE vs POST retiro que actúa como un "pasaporte biológico" de la sanación
+                    conseguida.</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="pricing.html" class="cta">Implementar en mi Centro</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Genetic Mirror AI. "Sanación medida es sanación real."</p>
+    </footer>
+</body>
+
+</html>

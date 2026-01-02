@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Mirror | Documentación de Negocios</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --forest: #2d4a3e;
+            --gold: #c5a059;
+            --cream: #fcfaf7;
+            --dark: #1a1a1a;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at top right, rgba(45, 74, 62, 0.3), transparent),
+                radial-gradient(circle at bottom left, rgba(197, 160, 89, 0.1), transparent);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            padding: 4rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px border rgba(255, 255, 255, 0.1);
+            border-radius: 4rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to bottom, #fff, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 3rem;
+        }
+
+        .menu {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--gold);
+        }
+
+        .menu-item h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .menu-item p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            font-weight: 300;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .footer {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            opacity: 0.4;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">Biology Mirror</div>
+        <div class="subtitle">Ecosistema de Negocios</div>
+
+        <div class="menu">
+            <a href="pitch.html" class="menu-item">
+                <div style="text-align: left;">
+                    <h3>Pitch de Venta</h3>
+                    <p>Nuestra visión, el problema y la solución disruptiva.</p>
+                </div>
+                <div class="icon">→</div>
+            </a>
+
+            <a href="specs.html" class="menu-item">
+                <div style="text-align: left;">
+                    <h3>Especificaciones Técnicas</h3>
+                    <p>Arquitectura IA, rPPG, FACS y Seguridad S-Tier.</p>
+                </div>
+                <div class="icon">→</div>
+            </a>
+
+            <a href="pricing.html" class="menu-item">
+                <div style="text-align: left;">
+                    <h3>Modelos de Precio</h3>
+                    <p>Licenciamiento Enterprise, API y Custom White-label.</p>
+                </div>
+                <div class="icon">→</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            GENETIC MIRROR AI 2026 • TODOS LOS DERECHOS RESERVADOS
+        </div>
+    </div>
+</body>
+
+</html>
