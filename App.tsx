@@ -122,26 +122,39 @@ function App() {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#fcfaf7]" />
             </div>
 
-            <div className="relative z-10 max-w-5xl mx-auto space-y-24">
-              <div className="text-center space-y-8 py-12">
-                <div className="inline-flex items-center space-x-2 bg-[#2d4a3e]/10 text-[#2d4a3e] px-6 py-2 rounded-full border border-[#2d4a3e]/20 text-xs font-bold uppercase tracking-[0.2em] mb-4">
-                  Sanctuary Edition • v2.0
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+                <div className="text-left space-y-10">
+                  <div className="inline-flex items-center space-x-2 bg-[#2d4a3e]/10 text-[#2d4a3e] px-6 py-2 rounded-full border border-[#2d4a3e]/20 text-xs font-bold uppercase tracking-[0.2em]">
+                    Sanctuary Edition • v2.0
+                  </div>
+                  <h1 className="text-7xl md:text-8xl xl:text-9xl font-serif font-bold text-neutral-900 leading-[0.9] tracking-tighter">
+                    Tu esencia, <br />
+                    <span className="text-[#2d4a3e] italic">reflejada.</span>
+                  </h1>
+                  <p className="text-2xl text-stone-600 max-w-xl leading-relaxed font-light italic">
+                    Un viaje introspectivo donde la tecnología de montaña decodifica tu estado biológico y emocional.
+                  </p>
+                  <div className="pt-4 flex justify-start">
+                    <button
+                      onClick={() => setCurrentView('PRE_CHECKIN')}
+                      className="bg-[#2d4a3e] text-white px-16 py-6 rounded-full font-bold shadow-2xl hover:bg-[#1e332a] transition-all transform hover:-translate-y-1 text-xl flex items-center space-x-3"
+                    >
+                      <span>Comenzar Evaluación</span>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </button>
+                  </div>
                 </div>
-                <h1 className="text-7xl md:text-9xl font-serif font-bold text-neutral-900 leading-none tracking-tighter">
-                  Tu esencia, <br />
-                  <span className="text-[#2d4a3e] italic">reflejada.</span>
-                </h1>
-                <p className="text-2xl text-stone-600 max-w-3xl mx-auto leading-relaxed font-light italic">
-                  Un viaje introspectivo donde la tecnología de montaña decodifica tu estado biológico y emocional.
-                </p>
-                <div className="pt-8 flex justify-center">
-                  <button
-                    onClick={() => setCurrentView('PRE_CHECKIN')}
-                    className="bg-[#2d4a3e] text-white px-16 py-6 rounded-full font-bold shadow-2xl hover:bg-[#1e332a] transition-all transform hover:-translate-y-1 text-xl flex items-center space-x-3"
-                  >
-                    <span>Comenzar Evaluación</span>
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                  </button>
+
+                <div className="relative flex justify-center lg:justify-end animate-in fade-in slide-in-from-right-8 duration-1000">
+                  <div className="relative w-full max-w-[450px]">
+                    <div className="absolute inset-0 bg-[#2d4a3e]/20 blur-[100px] rounded-full -z-10" />
+                    <img
+                      src="/hero-face.png"
+                      alt="Biology Mirror Digital Reveal"
+                      className="w-full h-auto drop-shadow-[0_35px_35px_rgba(45,74,62,0.3)] hover:scale-[1.02] transition-transform duration-700"
+                    />
+                  </div>
                 </div>
               </div>
 
