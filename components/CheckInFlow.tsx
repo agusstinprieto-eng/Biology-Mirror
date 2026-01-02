@@ -17,6 +17,8 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
   const [timeLeft, setTimeLeft] = useState(15);
   const [transcript, setTranscript] = useState('');
   const [isFaceMeshReady, setIsFaceMeshReady] = useState(false);
+  const [analysisProgress, setAnalysisProgress] = useState(0);
+  const [analysisStatus, setAnalysisStatus] = useState('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -65,27 +67,33 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
     if (!videoRef.current) return;
 
     try {
-      // Run all analyses in parallel
-      const [facs, bio, skin] = await Promise.all([
-        analyzeFaceMultiFrame(videoRef.current, 15),
-        analyzeHeartRate(videoRef.current, 5000),
-        analyzeSkin(videoRef.current)
-      ]);
+      setAnalysisStatus('Leyendo micro-gestos (FACS)...');
+      const facs = await analyzeFaceMultiFrame(videoRef.current, 15);
+      setAnalysisProgress(40);
 
-      // Gaze is derived from last FACS or handled separately
-      const gaze = analyzeGaze([]); // Simplified for now as gaze needs landmarks stream
+      setAnalysisStatus('Capturando pulso biológico (rPPG)...');
+      const bio = await analyzeHeartRate(videoRef.current, 3500); // Reduced to 3.5s for speed
+      setAnalysisProgress(80);
+
+      setAnalysisStatus('Analizando textura de piel...');
+      const skin = await analyzeSkin(videoRef.current);
+      setAnalysisProgress(100);
+
+      setAnalysisStatus('Finalizando mapeo...');
+      await new Promise(resolve => setTimeout(resolve, 500)); // Brief pause for UX
+
+      const gaze = analyzeGaze([]);
 
       const sessionData: SessionData = {
         facs,
         bio,
         skin,
         gaze,
-        transcript: '', // Will be filled in next step
+        transcript: '',
         timestamp: new Date().toISOString(),
         stage
       };
 
-      // Store in temp ref or state if needed, but for now we just move to transcript
       (window as any).tempSessionData = sessionData;
 
       setStep('TRANSCRIPT');
@@ -165,10 +173,13 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
               {step === 'ANALYZING' && (
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-white p-8">
                   <div className="w-full max-w-xs bg-white/20 h-1 rounded-full overflow-hidden mb-4">
-                    <div className="bg-emerald-400 h-full animate-pulse" style={{ width: '100%' }}></div>
+                    <div
+                      className="bg-[#2d4a3e] h-full transition-all duration-500 ease-out"
+                      style={{ width: `${analysisProgress}%` }}
+                    ></div>
                   </div>
-                  <p className="text-lg font-serif italic text-emerald-100">Analizando micro-variaciones...</p>
-                  <p className="text-xs opacity-60 mt-2 font-mono">EXTRACTING FACS VECTORS / COMPUTING rPPG / SKIN TEXTURE</p>
+                  <p className="text-lg font-serif italic text-[#a7f3d0]">{analysisStatus}</p>
+                  <p className="text-xs opacity-60 mt-2 font-mono">NEURAL ENGINE PROCESSING • {analysisProgress}%</p>
                 </div>
               )}
             </div>
