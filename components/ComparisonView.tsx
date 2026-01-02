@@ -118,6 +118,33 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({ pre, post }) => 
             </div>
           </div>
 
+          {/* Bio-Maps (Skin Perfusion) */}
+          <div className="glass rounded-[2.5rem] p-10 shadow-xl border border-white/20">
+            <h3 className="text-2xl font-serif font-bold text-neutral-800 mb-10 flex items-center">
+              <span className="w-10 h-10 rounded-xl bg-[#2d4a3e]/10 text-[#2d4a3e] flex items-center justify-center mr-4">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              </span>
+              Mapeo de Perfusión Neuro-Vascular
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 text-center">
+              <div className="space-y-6">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#c5a059]">Antes (Estrés)</span>
+                <BioMap data={pre.skin} stage="PRE" />
+                <p className="text-sm text-neutral-500 italic px-4 leading-relaxed">
+                  "Perfusión desigual, con manchas rojas por inflamación o palidez por vasoconstricción."
+                </p>
+              </div>
+              <div className="space-y-6">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#2d4a3e]">Después (Sanación)</span>
+                <BioMap data={post.skin} stage="POST" />
+                <p className="text-sm text-neutral-500 italic px-4 leading-relaxed">
+                  "Distribución sanguínea uniforme y rica en oxígeno, percibida como un brillo saludable."
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Metrics Comparison */}
           <div className="grid md:grid-cols-2 gap-8">
             <MetricCard label="Estado Pre-Retiro" data={pre} theme="amber" />
