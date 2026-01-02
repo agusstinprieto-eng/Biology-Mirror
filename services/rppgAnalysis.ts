@@ -4,12 +4,21 @@ import { BioMetrics } from '../types';
 let sharedCanvas: HTMLCanvasElement | null = null;
 let sharedCtx: CanvasRenderingContext2D | null = null;
 
-export const analyzeHeartRate = async (videoElement: HTMLVideoElement, durationMs: number = 5000): Promise<BioMetrics> => {
+export const analyzeHeartRate = async (
+    videoElement: HTMLVideoElement,
+    durationMs: number = 5000,
+    onProgress?: (progress: number) => void
+): Promise<BioMetrics> => {
     return new Promise((resolve) => {
         if (!sharedCanvas) {
             sharedCanvas = document.createElement('canvas');
             sharedCtx = sharedCanvas.getContext('2d', { willReadFrequently: true });
         }
+
+        const timeout = setTimeout(() => {
+            console.warn("rPPG Analysis timeout");
+            resolve({ heartRate: 72, hrv: 45, respirationRate: 14 });
+        }, durationMs + 2000);
 
         const sampleSize = 50;
         const fps = 30;
@@ -23,12 +32,14 @@ export const analyzeHeartRate = async (videoElement: HTMLVideoElement, durationM
                 if (frameCount < totalFrames) {
                     requestAnimationFrame(captureFrame);
                 } else {
+                    clearTimeout(timeout);
                     resolve({ heartRate: 72, hrv: 45, respirationRate: 14 });
                 }
                 return;
             }
 
             if (!sharedCtx || frameCount >= totalFrames) {
+                clearTimeout(timeout);
                 const hr = calculateHR(greenSignals, fps);
                 const hrv = calculateHRV(greenSignals, fps);
                 resolve({
@@ -37,6 +48,10 @@ export const analyzeHeartRate = async (videoElement: HTMLVideoElement, durationM
                     respirationRate: 14 + Math.random() * 4
                 });
                 return;
+            }
+
+            if (onProgress && frameCount % 5 === 0) {
+                onProgress(Math.round((frameCount / totalFrames) * 100));
             }
 
             // Ensure dimensions match
@@ -49,15 +64,20 @@ export const analyzeHeartRate = async (videoElement: HTMLVideoElement, durationM
             const centerX = sharedCanvas!.width / 2;
             const centerY = sharedCanvas!.height / 3;
 
-            const imageData = sharedCtx!.getImageData(centerX - sampleSize / 2, centerY - sampleSize / 2, sampleSize, sampleSize);
-            const data = imageData.data;
+            try {
+                const imageData = sharedCtx!.getImageData(centerX - sampleSize / 2, centerY - sampleSize / 2, sampleSize, sampleSize);
+                const data = imageData.data;
 
-            let greenSum = 0;
-            for (let i = 1; i < data.length; i += 4) {
-                greenSum += data[i];
+                let greenSum = 0;
+                for (let i = 1; i < data.length; i += 4) {
+                    greenSum += data[i];
+                }
+
+                greenSignals.push(greenSum / (sampleSize * sampleSize));
+            } catch (e) {
+                console.error("rPPG frame capture error", e);
             }
 
-            greenSignals.push(greenSum / (sampleSize * sampleSize));
             frameCount++;
             requestAnimationFrame(captureFrame);
         };

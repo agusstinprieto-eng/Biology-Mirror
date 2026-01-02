@@ -105,24 +105,26 @@ export const CheckInFlow: React.FC<CheckInFlowProps> = ({ stage, onComplete }) =
       let finalResults = bgResults;
 
       if (!finalResults) {
-        setAnalysisStatus('Analizando (FACS, rPPG, Skin)...');
-
-        // Critical: catch individual errors so one failure doesn't block the whole app
+        setAnalysisStatus('Analizando Micro-expresiones (FACS)...');
         const faceResult = await analyzeFaceMultiFrame(videoRef.current, 10, (p) => setAnalysisProgress(20 + p * 0.3))
           .catch(e => { console.error("Face Analysis fail", e); return { facs: { AU1: 0, AU4: 0, AU6: 0, AU12: 0, AU15: 0, AU17: 0, AU20: 0, AU24: 0 }, landmarks: [] }; });
 
-        const bio = await analyzeHeartRate(videoRef.current, 3000)
+        setAnalysisStatus('Midiendo Ritmo Cardíaco (rPPG)...');
+        const bio = await analyzeHeartRate(videoRef.current, 3000, (p) => setAnalysisProgress(50 + p * 0.3))
           .catch(e => { console.error("Bio Analysis fail", e); return { heartRate: 72, hrv: 45, respirationRate: 14 }; });
 
+        setAnalysisStatus('Analizando Dermotipo y Mirada...');
+        setAnalysisProgress(85);
         const skin = await analyzeSkin(videoRef.current)
           .catch(e => { console.error("Skin Analysis fail", e); return { homogeneity: 80, redness: 25, textureRoughness: 35 }; });
 
         const gaze = analyzeGaze(faceResult.landmarks);
+        setAnalysisProgress(95);
 
         finalResults = { facs: faceResult.facs, bio, skin, gaze };
       }
 
-      setAnalysisStatus('Finalizando reporte...');
+      setAnalysisStatus('Finalizando reporte neuro-somático...');
       setAnalysisProgress(100);
 
       const session: SessionData = {
