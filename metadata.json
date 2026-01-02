@@ -1,5 +1,5 @@
 {
-  "name": "Biology Mirror",
+  "name": "Espejo-Neurosomatico",
   "description": "An advanced wellness retreat assessment tool using computer vision and neuro-somatic analysis to measure transformation through digital phenotyping.",
   "requestFramePermissions": [
     "camera",

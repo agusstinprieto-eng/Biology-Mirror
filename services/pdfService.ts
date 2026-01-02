@@ -19,7 +19,7 @@ export const generatePDFReport = async (
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('times', 'bold');
-    doc.text('Biology Mirror', 20, 25);
+    doc.text('Espejo-Neurosomatico', 20, 25);
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
@@ -87,5 +87,5 @@ export const generatePDFReport = async (
     doc.text(splitDisclaimer, 20, 280);
 
     // Save the PDF
-    doc.save(`BiologyMirror_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
+    doc.save(`EspejoNeurosomatico_Report_${format(new Date(), 'yyyyMMdd_HHmm')}.pdf`);
 };
