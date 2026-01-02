@@ -19,7 +19,7 @@ export const generatePDFReport = async (
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
     doc.setFont('times', 'bold');
-    doc.text('Espejo-Neurosomatico', 20, 22);
+    doc.text('Espejo Neurosomático', 20, 22);
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');

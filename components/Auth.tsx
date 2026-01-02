@@ -33,7 +33,7 @@ export const Auth: React.FC = () => {
             <h2 className="text-3xl font-serif font-bold text-neutral-800 mb-2">
                 {isSignUp ? 'Crea tu Cuenta' : 'Bienvenido de nuevo'}
             </h2>
-            <p className="text-neutral-500 mb-8">Ingresa tus datos para acceder a Espejo-Neurosomatico.</p>
+            <p className="text-neutral-500 mb-8">Ingresa tus datos para acceder a Espejo Neurosomático.</p>
 
             <form onSubmit={handleAuth} className="space-y-6">
                 <div>
