@@ -8,6 +8,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
     <style>
         :root {
             --forest: #2B3326;
@@ -182,121 +185,231 @@
     </style>
 </head>
 
-<body>
-    <nav class="nav">
-        <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: white;">
-            Espejo-Neurosomático</div>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <a href="https://espejo-neurosomatico.vercel.app" target="_blank">Ver App ↗</a>
-            <a href="index.html">← Menú</a>
+<body class="text-zinc-200">
+    <!-- Password Overlay -->
+    <div id="password-overlay" class="fixed inset-0 z-[2000] bg-black flex flex-col items-center justify-center p-4">
+        <div class="max-w-md w-full text-center space-y-8">
+            <div class="mb-8">
+                <h1 class="text-4xl font-black tracking-tighter mb-2 text-white">ACCESO RESTRINGIDO</h1>
+                <p class="text-zinc-500 text-sm">Documentación técnica confidencial de Espejo-Neurosomático.</p>
+            </div>
+
+            <div class="relative">
+                <input type="password" id="access-code"
+                    class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 md:px-6 py-5 md:py-4 text-center text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-mono tracking-widest text-base md:text-lg"
+                    placeholder="CLAVE DE ACCESO" onkeypress="checkEnter(event)">
+                <div id="error-msg"
+                    class="absolute -bottom-8 left-0 right-0 text-red-500 text-xs font-bold uppercase tracking-widest opacity-0 transition-opacity">
+                    Acceso Denegado
+                </div>
+            </div>
+
+            <button onclick="verifyAccess()"
+                class="w-full bg-emerald-500 text-black font-black uppercase tracking-widest py-5 md:py-4 rounded-xl hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-emerald-500/20 text-xs md:text-sm">
+                Ver Documentación
+            </button>
+
+            <a href="index.html"
+                class="inline-flex items-center gap-2 text-zinc-600 hover:text-white transition-colors text-xs uppercase tracking-widest mt-8 font-black italic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+                Regresar al Inicio
+            </a>
         </div>
-    </nav>
-
-    <div class="content">
-        <h1 class="header-title">Arquitectura del <br><span style="color: var(--gold); font-style: italic;">Fenotipado
-                Digital</span></h1>
-
-        <div class="tech-grid">
-            <div class="tech-box">
-                <span class="label">Visión Computacional</span>
-                <h3>rPPG & Señalización</h3>
-                <p>Extracción de signos vitales mediante fotopletismografía remota. Analizamos cambios de luminiscencia
-                    en la piel imperceptibles para el ojo humano.</p>
-                <ul class="feature-list">
-                    <li>Detección de flujo sanguíneo microvascular</li>
-                    <li>Frecuencia cardíaca (+/- 2 bpm de precisión)</li>
-                    <li>Variabilidad de Frecuencia Cardíaca (RMSSD)</li>
-                    <li>Monitoreo de frecuencia respiratoria sub-dérmica</li>
-                </ul>
-            </div>
-
-            <div class="tech-box">
-                <span class="label">Psicología Somática</span>
-                <h3>FACS & Micro-expresiones</h3>
-                <p>Implementación del Facial Action Coding System para mapear estados afectivos y tensión muscular
-                    facial.</p>
-                <ul class="feature-list">
-                    <li>Seguimiento de 468 puntos de referencia</li>
-                    <li>Detección de Unidad de Acción (AU) en tiempo real</li>
-                    <li>Cálculo de asimetría por estrés cortical</li>
-                    <li>Análisis de estabilidad de mirada y parpadeo</li>
-                </ul>
-            </div>
-
-            <div class="tech-box">
-                <span class="label">Cognitivo / AI</span>
-                <h3>Hybrid Gemini Engine</h3>
-                <p>Nuestra lógica de IA procesa biomarcadores crudos y los correlaciona con contexto semántico mediante
-                    modelos multimodales.</p>
-                <ul class="feature-list">
-                    <li>Gemini 1.5 Flash para procesamiento de baja latencia</li>
-                    <li>Dual-model redundancy para alta disponibilidad</li>
-                    <li>Generación de insights clínicos empáticos</li>
-                    <li>Correlación de transcriptores de audio con bio-datos</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="security-banner">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Seguridad S-Tier
-                & Privacidad</h2>
-            <p style="max-width: 800px; margin: 0 auto 2rem; opacity: 0.8;">
-                Utilizamos infraestructura Supabase con cifrado AES-256 en reposo y TLS 1.3 en tránsito. Ninguna imagen
-                de video original sale del navegador del usuario; solo se transmiten vectores de datos anonimizados.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 3rem;">
-                <div><strong style="display: block; font-size: 1.5rem;">HIPAA</strong> Compliance Ready</div>
-                <div><strong style="display: block; font-size: 1.5rem;">GDPR</strong> Privacy First</div>
-                <div><strong style="display: block; font-size: 1.5rem;">SSL</strong> Secure Channel</div>
-            </div>
-        </div>
-
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Benchmarking de
-            Rendimiento</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Métrica</th>
-                    <th>Especificación</th>
-                    <th>Tecnología Base</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Latencia de Detección</td>
-                    <td>
-                        < 120ms</td>
-                    <td>MediaPipe WASM</td>
-                </tr>
-                <tr>
-                    <td>Resolución Requerida</td>
-                    <td>720p (30fps)</td>
-                    <td>WebRTC / HTML5</td>
-                </tr>
-                <tr>
-                    <td>Consumo de Datos</td>
-                    <td>~1.2MB por sesión</td>
-                    <td>Vector Storage</td>
-                </tr>
-                <tr>
-                    <td>Tiempo de Análisis AI</td>
-                    <td>
-                        < 4 segundos</td>
-                    <td>Gemini Serverless</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
-    <footer>
-        <p style="color: white; font-weight: 600; margin-bottom: 0.5rem;">IA.AGUS | Agustín Prieto</p>
-        <p style="margin-bottom: 0.5rem;">Tel: <a href="https://wa.me/528711439941"
-                style="color: inherit; text-decoration: none;">+52 871 143 9941</a></p>
-        <p><a href="https://www.ia-agus.com" target="_blank"
-                style="color: var(--gold); text-decoration: none;">Visitar Sitio Web</a></p>
-        <div style="margin-top: 2rem; opacity: 0.3; font-size: 0.7rem;">NEUROSOMATIC-MIRROR © 2026 | Neurosomatic-mirror
-            Core V2.4</div>
-    </footer>
+    <!-- Main Content (Hidden by default) -->
+    <div id="main-content" class="hidden opacity-0 transition-opacity duration-1000">
+        <nav class="nav">
+            <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: white;">
+                Espejo-Neurosomático</div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="https://espejo-neurosomatico.vercel.app" target="_blank">Ver App ↗</a>
+                <a href="index.html">← Menú</a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <h1 class="header-title">Arquitectura del <br><span
+                    style="color: var(--gold); font-style: italic;">Fenotipado
+                    Digital</span></h1>
+
+            <div class="guide-section"
+                style="background: rgba(43, 51, 38, 0.4); border: 1px solid rgba(214, 179, 132, 0.1); padding: 3rem; margin-bottom: 6rem; border-radius: 0;">
+                <h2
+                    style="font-family: 'Raleway', sans-serif; color: var(--gold); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; border-bottom: 1px solid rgba(214, 179, 132, 0.2); padding-bottom: 1rem;">
+                    Flujo Maestro del Ecosistema</h2>
+                <div class="mermaid" style="background: transparent;">
+                    graph TD
+                    A[Usuario: Check-In] --> B{Captura de Señal}
+                    B -->|Video Stream| C[Navegador: WebRTC/WASM]
+                    C -->|rPPG Data| D[Análisis de Pulso & HRV]
+                    C -->|FACS Data| E[Análisis de Micro-expresiones]
+                    D & E --> F[Hybrid Gemini Engine]
+                    F -->|Processing| G[Dr. Alara AI: Diagnóstico Somático]
+                    G -->|Insights| H[Dashboard de Resultados]
+                    H --> I[Generación de PDF de Sesión]
+                    I --> J[Cierre de Sesión: Supabase Cloud]
+
+                    style A fill:#D6B384,stroke:#2B3326,color:#2B3326
+                    style F fill:#707A59,stroke:#D6B384,color:#fff
+                    style G fill:#707A59,stroke:#D6B384,color:#fff
+                    style J fill:#2B3326,stroke:#D6B384,color:#D6B384
+                </div>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-box">
+                    <span class="label">Visión Computacional</span>
+                    <h3>rPPG & Señalización</h3>
+                    <p>Extracción de signos vitales mediante fotopletismografía remota. Analizamos cambios de
+                        luminiscencia
+                        en la piel imperceptibles para el ojo humano.</p>
+                    <ul class="feature-list">
+                        <li>Detección de flujo sanguíneo microvascular</li>
+                        <li>Frecuencia cardíaca (+/- 2 bpm de precisión)</li>
+                        <li>Variabilidad de Frecuencia Cardíaca (RMSSD)</li>
+                        <li>Monitoreo de frecuencia respiratoria sub-dérmica</li>
+                    </ul>
+                </div>
+
+                <div class="tech-box">
+                    <span class="label">Psicología Somática</span>
+                    <h3>FACS & Micro-expresiones</h3>
+                    <p>Implementación del Facial Action Coding System para mapear estados afectivos y tensión muscular
+                        facial.</p>
+                    <ul class="feature-list">
+                        <li>Seguimiento de 468 puntos de referencia</li>
+                        <li>Detección de Unidad de Acción (AU) en tiempo real</li>
+                        <li>Cálculo de asimetría por estrés cortical</li>
+                        <li>Análisis de estabilidad de mirada y parpadeo</li>
+                    </ul>
+                </div>
+
+                <div class="tech-box">
+                    <span class="label">Cognitivo / AI</span>
+                    <h3>Hybrid Gemini Engine</h3>
+                    <p>Nuestra lógica de IA procesa biomarcadores crudos y los correlaciona con contexto semántico
+                        mediante
+                        modelos multimodales.</p>
+                    <ul class="feature-list">
+                        <li>Gemini 1.5 Flash para procesamiento de baja latencia</li>
+                        <li>Dual-model redundancy para alta disponibilidad</li>
+                        <li>Generación de insights clínicos empáticos</li>
+                        <li>Correlación de transcriptores de audio con bio-datos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="security-banner">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Seguridad
+                    S-Tier
+                    & Privacidad</h2>
+                <p style="max-width: 800px; margin: 0 auto 2rem; opacity: 0.8;">
+                    Utilizamos infraestructura Supabase con cifrado AES-256 en reposo y TLS 1.3 en tránsito. Ninguna
+                    imagen
+                    de video original sale del navegador del usuario; solo se transmiten vectores de datos anonimizados.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 3rem;">
+                    <div><strong style="display: block; font-size: 1.5rem;">HIPAA</strong> Compliance Ready</div>
+                    <div><strong style="display: block; font-size: 1.5rem;">GDPR</strong> Privacy First</div>
+                    <div><strong style="display: block; font-size: 1.5rem;">SSL</strong> Secure Channel</div>
+                </div>
+            </div>
+
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Benchmarking de
+                Rendimiento</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Especificación</th>
+                        <th>Tecnología Base</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Latencia de Detección</td>
+                        <td>
+                            < 120ms</td>
+                        <td>MediaPipe WASM</td>
+                    </tr>
+                    <tr>
+                        <td>Resolución Requerida</td>
+                        <td>720p (30fps)</td>
+                        <td>WebRTC / HTML5</td>
+                    </tr>
+                    <tr>
+                        <td>Consumo de Datos</td>
+                        <td>~1.2MB por sesión</td>
+                        <td>Vector Storage</td>
+                    </tr>
+                    <tr>
+                        <td>Tiempo de Análisis AI</td>
+                        <td>
+                            < 4 segundos</td>
+                        <td>Gemini Serverless</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <footer
+                style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; opacity: 1;">
+                <p style="color: white; font-weight: 600; margin-bottom: 0.5rem;">IA.AGUS | Agustín Prieto</p>
+                <p style="margin-bottom: 0.5rem;">Tel: <a href="https://wa.me/528711439941"
+                        style="color: inherit; text-decoration: none;">+52 871 143 9941</a></p>
+                <p style="margin-bottom: 0.5rem;"><a href="https://www.ia-agus.com" target="_blank"
+                        style="color: var(--gold); text-decoration: none;">Visitar Sitio Web</a></p>
+                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
+                    <a href="https://www.youtube.com/@ia.agus" target="_blank"
+                        style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">YOUTUBE</a>
+                    <a href="https://www.facebook.com/ia.agus" target="_blank"
+                        style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">FACEBOOK</a>
+                </div>
+                <div style="margin-top: 2rem; opacity: 0.3; font-size: 0.7rem;">NEUROSOMATIC-MIRROR © 2026</div>
+            </footer>
+        </div>
+
+    </div>
+
+    <script>
+        const overlay = document.getElementById('password-overlay');
+        const content = document.getElementById('main-content');
+        const input = document.getElementById('access-code');
+        const errorMsg = document.getElementById('error-msg');
+
+        function verifyAccess() {
+            const pass = input.value;
+            if (pass === 'admin' || pass === 'ia.agus') {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    content.classList.remove('hidden');
+                    void content.offsetWidth;
+                    content.style.opacity = '1';
+                }, 500);
+            } else {
+                errorMsg.style.opacity = '1';
+                input.classList.add('border-red-500', 'text-red-500');
+                setTimeout(() => {
+                    errorMsg.style.opacity = '0';
+                    input.classList.remove('border-red-500', 'text-red-500');
+                }, 2000);
+            }
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                verifyAccess();
+            }
+        }
+
+        window.onload = () => {
+            input.focus();
+        };
+    </script>
 </body>
 
 </html>
