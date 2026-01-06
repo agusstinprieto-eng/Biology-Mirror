@@ -69,7 +69,7 @@ function App() {
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
           <div className="flex items-center space-x-3 mb-12">
             <div className="w-12 h-12 bg-[#2d4a3e] rounded-full shadow-2xl border-2 border-white/20" />
-            <span className="text-4xl font-serif font-bold tracking-tight text-white drop-shadow-md">Neurosomatic-mirror</span>
+            <span className="text-4xl font-serif font-bold tracking-tight text-white drop-shadow-md">Espejo-Neurosomático</span>
           </div>
           <div className="glass p-8 rounded-[2rem] shadow-2xl max-w-md w-full">
             <Auth />
@@ -219,10 +219,17 @@ function App() {
         )}
       </main>
 
-      <footer className="p-12 border-t border-neutral-100 text-center bg-white">
-        <p className="text-xs text-neutral-400 font-bold uppercase tracking-[0.4em]">
-          &copy; 2026 Neurosomatic-mirror &bull; IA.AGUS
-        </p>
+      <footer className="p-16 border-t border-neutral-100 text-center bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center gap-12 mb-8 opacity-40">
+            <a href="https://www.youtube.com/@ia.agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">YouTube</a>
+            <a href="https://www.facebook.com/ia.agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">Facebook</a>
+          </div>
+          <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-[0.5em] mb-2">
+            &copy; 2026 Espejo-Neurosomático &bull; IA.AGUS
+          </p>
+          <p className="text-[8px] text-neutral-300 uppercase tracking-[0.2em]">Consultoría de Inteligencia Artificial Multimodal</p>
+        </div>
       </footer>
     </div>
   );
