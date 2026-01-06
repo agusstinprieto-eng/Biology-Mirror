@@ -4,199 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especificaciones Técnicas | Neurosomatic-mirror</title>
+    <title>Especificaciones Técnicas | Espejo-Neurosomático</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&family=Cinzel:wght@400;700&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            fontFamily: 'Outfit',
+            themeVariables: {
+                primaryColor: '#D6B384',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#D6B384',
+                lineColor: '#707A59',
+                secondaryColor: '#2B3326',
+                tertiaryColor: '#1a1f18'
+            }
+        });
+    </script>
     <style>
         :root {
-            --forest: #2B3326;
-            --moss: #707A59;
             --gold: #D6B384;
-            --accent: #EA492E;
-            --cream: #E8E6E6;
+            --bg: #0d110b;
+            --forest: #2B3326;
         }
 
         body {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: var(--forest);
-            color: #d1d1d1;
-            line-height: 1.8;
-            background-image:
-                radial-gradient(circle at top right, rgba(112, 122, 89, 0.2), transparent 40%),
-                radial-gradient(circle at bottom left, rgba(214, 179, 132, 0.1), transparent 40%);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
         }
 
-        .nav {
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            box-sizing: border-box;
-            background: rgba(15, 23, 21, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .nav a {
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-
-        .content {
-            padding: 8rem 10% 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header-title {
+        .font-cinzel {
             font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            color: white;
-            margin-bottom: 3rem;
         }
 
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-bottom: 6rem;
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .tech-box {
-            background: rgba(43, 51, 38, 0.6);
+        .spec-item {
+            transition: all 0.3s ease;
+            background: rgba(43, 51, 38, 0.3);
             border: 1px solid rgba(214, 179, 132, 0.1);
-            padding: 3rem;
-            border-radius: 0;
-            transition: all 0.3s;
         }
 
-        .tech-box:hover {
+        .spec-item:hover {
+            transform: translateY(-3px);
             border-color: var(--gold);
-            transform: translateY(-5px);
-            background: rgba(112, 122, 89, 0.2);
-        }
-
-        .tech-box h3 {
-            font-family: 'Raleway', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .tech-box h3::before {
-            content: '';
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            background: var(--gold);
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-
-        .label {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(197, 160, 89, 0.1);
-            color: var(--gold);
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-        }
-
-        .feature-list li {
-            padding-left: 2rem;
-            position: relative;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #a7f3d0;
-            font-weight: bold;
-        }
-
-        .security-banner {
-            background: linear-gradient(45deg, var(--forest), #1a332a);
-            padding: 4rem;
-            border-radius: 4rem;
-            text-align: center;
-            color: white;
-            margin-bottom: 6rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 2rem;
-            overflow: hidden;
-        }
-
-        th,
-        td {
-            padding: 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        th {
-            color: var(--gold);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.8rem;
-            opacity: 0.4;
+            background: rgba(43, 51, 38, 0.5);
         }
     </style>
 </head>
 
 <body class="text-zinc-200">
+
     <!-- Password Overlay -->
-    <div id="password-overlay" class="fixed inset-0 z-[2000] bg-black flex flex-col items-center justify-center p-4">
+    <div id="password-overlay" class="fixed inset-0 z-50 bg-[#0d110b] flex flex-col items-center justify-center p-4">
         <div class="max-w-md w-full text-center space-y-8">
             <div class="mb-8">
-                <h1 class="text-4xl font-black tracking-tighter mb-2 text-white">ACCESO RESTRINGIDO</h1>
-                <p class="text-zinc-500 text-sm">Documentación técnica confidencial de Espejo-Neurosomático.</p>
+                <h1 class="text-4xl font-black tracking-tighter mb-2 text-white font-cinzel italic">ACCESO RESTRINGIDO
+                </h1>
+                <p class="text-zinc-500 text-sm tracking-widest uppercase">Intellectual Property & Technical Specs</p>
             </div>
 
             <div class="relative">
                 <input type="password" id="access-code"
-                    class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 md:px-6 py-5 md:py-4 text-center text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-mono tracking-widest text-base md:text-lg"
+                    class="w-full bg-[#1a1f18] border border-zinc-800 rounded-xl px-6 py-4 text-center text-white placeholder-zinc-600 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all font-mono tracking-widest text-lg"
                     placeholder="CLAVE DE ACCESO" onkeypress="checkEnter(event)">
                 <div id="error-msg"
                     class="absolute -bottom-8 left-0 right-0 text-red-500 text-xs font-bold uppercase tracking-widest opacity-0 transition-opacity">
@@ -205,184 +81,172 @@
             </div>
 
             <button onclick="verifyAccess()"
-                class="w-full bg-emerald-500 text-black font-black uppercase tracking-widest py-5 md:py-4 rounded-xl hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-emerald-500/20 text-xs md:text-sm">
-                Ver Documentación
+                class="w-full bg-gold text-black font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-gold/20 font-cinzel">
+                Desbloquear Docs
             </button>
 
             <a href="index.html"
-                class="inline-flex items-center gap-2 text-zinc-600 hover:text-white transition-colors text-xs uppercase tracking-widest mt-8 font-black italic">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m15 18-6-6 6-6" />
-                </svg>
-                Regresar al Inicio
+                class="inline-block text-zinc-600 hover:text-white text-xs uppercase tracking-widest mt-8 transition-colors">
+                ← Regresar al Hub
             </a>
         </div>
     </div>
 
-    <!-- Main Content (Hidden by default) -->
-    <div id="main-content" class="hidden opacity-0 transition-opacity duration-1000">
-        <nav class="nav">
-            <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: white;">
-                Espejo-Neurosomático</div>
-            <div style="display: flex; gap: 1rem; align-items: center;">
-                <a href="https://espejo-neurosomatico.vercel.app" target="_blank">Ver App ↗</a>
-                <a href="index.html">← Menú</a>
-            </div>
-        </nav>
+    <!-- Main Content -->
+    <div id="main-content" class="max-w-4xl mx-auto px-5 py-16 hidden opacity-0 transition-opacity duration-1000">
+        <header class="border-b-2 border-gold/30 pb-10 mb-16 relative">
+            <a href="index.html"
+                class="absolute top-0 right-0 text-zinc-500 hover:text-white transition-colors text-xs uppercase tracking-widest flex items-center gap-2">
+                Volver al Hub
+            </a>
+            <div
+                class="inline-block px-3 py-1 bg-gold text-black rounded-full text-[0.6rem] font-black uppercase mb-4 tracking-widest">
+                Classified: Neurosomatic Architecture</div>
+            <h1 class="text-5xl font-extrabold tracking-tight mb-2 font-cinzel italic">Espejo <span
+                    class="text-gold">Neurosomático</span></h1>
+            <p class="font-mono text-gold text-sm opacity-60">System Specifications v3.1.0 // Build 2026.01.06</p>
+        </header>
 
-        <div class="content">
-            <h1 class="header-title">Arquitectura del <br><span
-                    style="color: var(--gold); font-style: italic;">Fenotipado
-                    Digital</span></h1>
-
-            <div class="guide-section"
-                style="background: rgba(43, 51, 38, 0.4); border: 1px solid rgba(214, 179, 132, 0.1); padding: 3rem; margin-bottom: 6rem; border-radius: 0;">
-                <h2
-                    style="font-family: 'Raleway', sans-serif; color: var(--gold); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; border-bottom: 1px solid rgba(214, 179, 132, 0.2); padding-bottom: 1rem;">
-                    Flujo Maestro del Ecosistema</h2>
-                <div class="mermaid" style="background: transparent;">
-                    graph TD
-                    A[Usuario: Check-In] --> B{Captura de Señal}
-                    B -->|Video Stream| C[Navegador: WebRTC/WASM]
-                    C -->|rPPG Data| D[Análisis de Pulso & HRV]
-                    C -->|FACS Data| E[Análisis de Micro-expresiones]
-                    D & E --> F[Hybrid Gemini Engine]
-                    F -->|Processing| G[Dr. Alara AI: Diagnóstico Somático]
-                    G -->|Insights| H[Dashboard de Resultados]
-                    H --> I[Generación de PDF de Sesión]
-                    I --> J[Cierre de Sesión: Supabase Cloud]
-
-                    style A fill:#D6B384,stroke:#2B3326,color:#2B3326
-                    style F fill:#707A59,stroke:#D6B384,color:#fff
-                    style G fill:#707A59,stroke:#D6B384,color:#fff
-                    style J fill:#2B3326,stroke:#D6B384,color:#D6B384
+        <section id="stack" class="mb-20">
+            <h2
+                class="text-2xl font-bold text-gold mb-8 uppercase tracking-widest flex items-center gap-4 font-cinzel italic">
+                Core Technology Stack
+                <span class="flex-1 h-px bg-zinc-800"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="spec-item p-6 rounded-2xl">
+                    <h3 class="text-[10px] uppercase text-zinc-500 font-extrabold mb-3 tracking-widest">AI Multimodal
+                    </h3>
+                    <div class="font-mono text-sm font-bold text-white">Gemini 1.5 Pro</div>
+                </div>
+                <div class="spec-item p-6 rounded-2xl">
+                    <h3 class="text-[10px] uppercase text-zinc-500 font-extrabold mb-3 tracking-widest">Biometric
+                        Processing</h3>
+                    <div class="font-mono text-sm font-bold text-white">WebRTC + WASM</div>
+                </div>
+                <div class="spec-item p-6 rounded-2xl">
+                    <h3 class="text-[10px] uppercase text-zinc-500 font-extrabold mb-3 tracking-widest">Data & Auth</h3>
+                    <div class="font-mono text-sm font-bold text-white">Supabase / PG15</div>
+                </div>
+                <div class="spec-item p-6 rounded-2xl">
+                    <h3 class="text-[10px] uppercase text-zinc-500 font-extrabold mb-3 tracking-widest">UI Architecture
+                    </h3>
+                    <div class="font-mono text-sm font-bold text-white">React 19 / Vite</div>
                 </div>
             </div>
+        </section>
 
-            <div class="tech-grid">
-                <div class="tech-box">
-                    <span class="label">Visión Computacional</span>
-                    <h3>rPPG & Señalización</h3>
-                    <p>Extracción de signos vitales mediante fotopletismografía remota. Analizamos cambios de
-                        luminiscencia
-                        en la piel imperceptibles para el ojo humano.</p>
-                    <ul class="feature-list">
-                        <li>Detección de flujo sanguíneo microvascular</li>
-                        <li>Frecuencia cardíaca (+/- 2 bpm de precisión)</li>
-                        <li>Variabilidad de Frecuencia Cardíaca (RMSSD)</li>
-                        <li>Monitoreo de frecuencia respiratoria sub-dérmica</li>
-                    </ul>
-                </div>
-
-                <div class="tech-box">
-                    <span class="label">Psicología Somática</span>
-                    <h3>FACS & Micro-expresiones</h3>
-                    <p>Implementación del Facial Action Coding System para mapear estados afectivos y tensión muscular
-                        facial.</p>
-                    <ul class="feature-list">
-                        <li>Seguimiento de 468 puntos de referencia</li>
-                        <li>Detección de Unidad de Acción (AU) en tiempo real</li>
-                        <li>Cálculo de asimetría por estrés cortical</li>
-                        <li>Análisis de estabilidad de mirada y parpadeo</li>
-                    </ul>
-                </div>
-
-                <div class="tech-box">
-                    <span class="label">Cognitivo / AI</span>
-                    <h3>Hybrid Gemini Engine</h3>
-                    <p>Nuestra lógica de IA procesa biomarcadores crudos y los correlaciona con contexto semántico
-                        mediante
-                        modelos multimodales.</p>
-                    <ul class="feature-list">
-                        <li>Gemini 1.5 Flash para procesamiento de baja latencia</li>
-                        <li>Dual-model redundancy para alta disponibilidad</li>
-                        <li>Generación de insights clínicos empáticos</li>
-                        <li>Correlación de transcriptores de audio con bio-datos</li>
-                    </ul>
-                </div>
+        <section id="flow" class="mb-20">
+            <h2
+                class="text-2xl font-bold text-gold mb-8 uppercase tracking-widest flex items-center gap-4 font-cinzel italic">
+                Maestro del Ecosistema
+                <span class="flex-1 h-px bg-zinc-800"></span>
+            </h2>
+            <div class="bg-[#1a1f18]/30 p-8 rounded-[40px] border border-gold/10 overflow-x-auto">
+                <pre class="mermaid">
+graph TD
+    A[Usuario: Check-In] --> B{Captura de Señal}
+    B -->|Video Stream| C[Navegador: WebRTC/WASM]
+    C -->|rPPG Data| D[Análisis de Pulso & HRV]
+    C -->|FACS Data| E[Análisis de Micro-expresiones]
+    D & E --> F[Hybrid Gemini Engine]
+    F -->|Processing| G[Dr. Alara AI: Diagnóstico Somático]
+    G -->|Insights| H[Dashboard de Resultados]
+    H --> I[Generación de PDF de Sesión]
+    I --> J[Cierre de Sesión: Supabase Cloud]
+                </pre>
             </div>
+        </section>
 
-            <div class="security-banner">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Seguridad
-                    S-Tier
-                    & Privacidad</h2>
-                <p style="max-width: 800px; margin: 0 auto 2rem; opacity: 0.8;">
-                    Utilizamos infraestructura Supabase con cifrado AES-256 en reposo y TLS 1.3 en tránsito. Ninguna
-                    imagen
-                    de video original sale del navegador del usuario; solo se transmiten vectores de datos anonimizados.
+        <section id="infrastructure" class="mb-20">
+            <h2
+                class="text-2xl font-bold text-gold mb-8 uppercase tracking-widest flex items-center gap-4 font-cinzel italic">
+                Infraestructura S-Tier <span class="flex-1 h-px bg-zinc-800"></span></h2>
+            <ul class="space-y-4">
+                <li
+                    class="p-8 bg-[#1a1f18]/40 rounded-3xl border-l-4 border-gold group hover:bg-[#1a1f18]/60 transition-all">
+                    <strong class="block text-white mb-2 font-cinzel uppercase tracking-widest text-sm">Privacidad por
+                        Diseño</strong>
+                    <p class="text-zinc-400 text-sm font-light">Procesamiento de video local (Client-Side) vía FaceMesh.
+                        Las imágenes nunca abandonan el dispositivo del usuario; solo viajan vectores de datos
+                        anonimizados.</p>
+                </li>
+                <li
+                    class="p-8 bg-[#1a1f18]/40 rounded-3xl border-l-4 border-gold group hover:bg-[#1a1f18]/60 transition-all">
+                    <strong class="block text-white mb-2 font-cinzel uppercase tracking-widest text-sm">Motor Cognitivo
+                        Dr. Alara</strong>
+                    <p class="text-zinc-400 text-sm font-light">IA generativa especializada con prompts terapéuticos
+                        avanzados para la interpretación de biomarcadores somáticos en tiempo real.</p>
+                </li>
+                <li
+                    class="p-8 bg-[#1a1f18]/40 rounded-3xl border-l-4 border-gold group hover:bg-[#1a1f18]/60 transition-all">
+                    <strong class="block text-white mb-2 font-cinzel uppercase tracking-widest text-sm">Seguridad de
+                        Datos</strong>
+                    <p class="text-zinc-400 text-sm font-light">Encriptación AES-256 en reposo y TLS 1.3 en tránsito.
+                        Base de datos con Row Level Security (RLS) para aislamiento total de pacientes.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="ai-code" class="mb-20">
+            <h2
+                class="text-2xl font-bold text-gold mb-8 uppercase tracking-widest flex items-center gap-4 font-cinzel italic">
+                AI Pipeline Architecture <span class="flex-1 h-px bg-zinc-800"></span></h2>
+            <div
+                class="bg-[#0a0a0b] p-8 rounded-3xl border border-zinc-800 font-mono text-xs overflow-x-auto leading-relaxed">
+                <span class="text-zinc-600">// rPPG Signal Deconvolution</span><br>
+                <span class="text-gold">const</span> processBiometrics = <span class="text-gold">async</span> (stream)
+                => {<br>
+                &nbsp;&nbsp;<span class="text-zinc-500">// Detect face landmarks (468 points)</span><br>
+                &nbsp;&nbsp;const landmarks = await detector.estimateFaces(stream);<br>
+                &nbsp;&nbsp;<span class="text-zinc-500">// Extract ROI from forehead and cheeks</span><br>
+                &nbsp;&nbsp;const signal = extractChrominance(landmarks);<br>
+                &nbsp;&nbsp;<span class="text-zinc-500">// FFT analysis for Heart Rate extraction</span><br>
+                &nbsp;&nbsp;return computeHRV(signal);<br>
+                };
+            </div>
+        </section>
+
+        <footer class="mt-20 py-12 border-t border-white/10 text-center w-full relative z-10">
+            <div class="max-w-4xl mx-auto px-4">
+                <h3 class="text-3xl font-black text-white tracking-tighter mb-2 font-cinzel italic">IA.AGUS</h3>
+                <p class="text-gold mb-8 font-light tracking-widest text-[10px] uppercase opacity-70">Personal Branding
+                    & AI Strategy</p>
+
+                <div
+                    class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-zinc-400 text-[10px] mb-12 font-semibold uppercase tracking-[0.2em]">
+                    <span class="flex items-center gap-2">
+                        Agustín Prieto
+                    </span>
+                    <a href="https://wa.me/528711439941" class="hover:text-white transition-colors">
+                        +52 871 143 9941
+                    </a>
+                    <a href="https://www.ia-agus.com" target="_blank" class="hover:text-white transition-colors">
+                        www.ia-agus.com
+                    </a>
+                </div>
+
+                <div class="mb-10 flex flex-col items-center">
+                    <img src="../assets/branding/business-card.jpg" alt="IA.AGUS Business Card"
+                        class="max-w-[320px] rounded-lg shadow-2xl border border-white/5 opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+
+                <p class="text-[8px] text-zinc-600 uppercase tracking-[0.5em] font-black italic">
+                    © 2026 Espejo-Neurosomático. Confidencial & Patentado.
                 </p>
-                <div style="display: flex; justify-content: center; gap: 3rem;">
-                    <div><strong style="display: block; font-size: 1.5rem;">HIPAA</strong> Compliance Ready</div>
-                    <div><strong style="display: block; font-size: 1.5rem;">GDPR</strong> Privacy First</div>
-                    <div><strong style="display: block; font-size: 1.5rem;">SSL</strong> Secure Channel</div>
-                </div>
             </div>
-
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Benchmarking de
-                Rendimiento</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Métrica</th>
-                        <th>Especificación</th>
-                        <th>Tecnología Base</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Latencia de Detección</td>
-                        <td>
-                            < 120ms</td>
-                        <td>MediaPipe WASM</td>
-                    </tr>
-                    <tr>
-                        <td>Resolución Requerida</td>
-                        <td>720p (30fps)</td>
-                        <td>WebRTC / HTML5</td>
-                    </tr>
-                    <tr>
-                        <td>Consumo de Datos</td>
-                        <td>~1.2MB por sesión</td>
-                        <td>Vector Storage</td>
-                    </tr>
-                    <tr>
-                        <td>Tiempo de Análisis AI</td>
-                        <td>
-                            < 4 segundos</td>
-                        <td>Gemini Serverless</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <footer
-                style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; opacity: 1;">
-                <p style="color: white; font-weight: 600; margin-bottom: 0.5rem;">IA.AGUS | Agustín Prieto</p>
-                <p style="margin-bottom: 0.5rem;">Tel: <a href="https://wa.me/528711439941"
-                        style="color: inherit; text-decoration: none;">+52 871 143 9941</a></p>
-                <p style="margin-bottom: 0.5rem;"><a href="https://www.ia-agus.com" target="_blank"
-                        style="color: var(--gold); text-decoration: none;">Visitar Sitio Web</a></p>
-                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
-                    <a href="https://www.youtube.com/@ia.agus" target="_blank"
-                        style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">YOUTUBE</a>
-                    <a href="https://www.facebook.com/ia.agus" target="_blank"
-                        style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">FACEBOOK</a>
-                </div>
-                <div style="margin-top: 2rem; opacity: 0.3; font-size: 0.7rem;">NEUROSOMATIC-MIRROR © 2026</div>
-            </footer>
-        </div>
-
+        </footer>
     </div>
 
     <script>
+        const ACCESS_KEY = "ia.agus";
         const overlay = document.getElementById('password-overlay');
         const content = document.getElementById('main-content');
         const input = document.getElementById('access-code');
         const errorMsg = document.getElementById('error-msg');
 
         function verifyAccess() {
-            const pass = input.value;
-            if (pass === 'admin' || pass === 'ia.agus') {
+            if (input.value.toLowerCase() === ACCESS_KEY || input.value.toLowerCase() === 'admin') {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
@@ -410,6 +274,7 @@
             input.focus();
         };
     </script>
+
 </body>
 
 </html>

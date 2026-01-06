@@ -4,236 +4,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual de Usuario | Neurosomatic-mirror</title>
+    <title>Manual de Operación | Espejo-Neurosomático</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Cinzel:wght@400;700;900&display=swap"
         rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root {
-            --forest: #2B3326;
-            --moss: #707A59;
-            --gold: #D6B384;
-            --accent: #EA492E;
-            --cream: #E8E6E6;
-        }
-
         body {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: var(--forest);
-            color: #d1d1d1;
-            line-height: 1.8;
-            background-image:
-                radial-gradient(circle at top right, rgba(112, 122, 89, 0.2), transparent 40%),
-                radial-gradient(circle at bottom left, rgba(214, 179, 132, 0.1), transparent 40%);
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0d110b;
         }
 
-        .nav {
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            box-sizing: border-box;
-            background: rgba(15, 23, 21, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .nav a {
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-
-        .content {
-            padding: 8rem 10% 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .header-title {
+        .font-cinzel {
             font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 2rem;
-            text-align: center;
         }
 
-        .guide-section {
-            background: rgba(43, 51, 38, 0.4);
-            border: 1px solid rgba(214, 179, 132, 0.1);
-            padding: 3rem;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .guide-section h2 {
-            font-family: 'Raleway', sans-serif;
-            color: var(--gold);
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 0;
-            border-bottom: 1px solid rgba(214, 179, 132, 0.2);
-            padding-bottom: 1rem;
-        }
-
-        .step {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: var(--gold);
-            color: var(--forest);
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            color: white;
-            margin-top: 0;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .highlight-box {
+        .sidebar-link.active {
+            color: #D6B384;
+            border-left-color: #D6B384;
             background: rgba(214, 179, 132, 0.05);
-            border-left: 4px solid var(--gold);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            font-style: italic;
         }
 
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.8rem;
-            opacity: 0.8;
+        .text-gold {
+            color: #D6B384;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+        .bg-gold {
+            background-color: #D6B384;
         }
 
-        .social-links a {
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 0.1em;
+        .border-gold {
+            border-color: #D6B384;
         }
     </style>
 </head>
 
-<body>
-    <nav class="nav">
-        <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: white;">
-            Espejo-Neurosomático</div>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <a href="https://espejo-neurosomatico.vercel.app" target="_blank">Ver App ↗</a>
-            <a href="index.html">← Menú</a>
-        </div>
-    </nav>
+<body class="text-zinc-300">
 
-    <div class="content">
-        <h1 class="header-title">Manual de <br><span style="color: var(--gold); font-style: italic;">Operación
-                Técnica</span></h1>
+    <div class="flex min-h-screen">
 
-        <div class="guide-section">
-            <h2>1. Preparación del Entorno</h2>
-            <div class="step">
-                <div class="step-number">I</div>
-                <div class="step-content">
-                    <h3>Iluminación y Fondo</h3>
-                    <p>Para resultados óptimos, asegúrese de estar en un espacio bien iluminado. La luz debe ser frontal
-                        y suave. Evite luces intensas detrás de usted (contraluz) que oscurezcan su rostro.</p>
-                </div>
+        <!-- Sidebar Navigation -->
+        <aside class="w-72 fixed h-full bg-[#1a1f18] border-r border-gold/10 hidden lg:block overflow-y-auto">
+            <div class="p-8">
+                <h2 class="text-xl font-black text-white tracking-widest mb-10 font-cinzel text-center">ESPEJO <br><span
+                        class="text-gold">NEUROSOMÁTICO</span></h2>
+
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-3 bg-gold/10 text-gold rounded-xl mb-10 hover:bg-gold hover:text-black transition-all font-bold text-xs uppercase tracking-widest group w-full border border-gold/20">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+                    Volver al Hub
+                </a>
+
+                <nav class="space-y-2">
+                    <a href="#welcome"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">✨
+                        Bienvenida</a>
+                    <a href="#prep"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">🕯️
+                        Preparación del Entorno</a>
+                    <a href="#scan"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">📸
+                        Proceso de Escaneo</a>
+                    <a href="#analytics"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">🧠
+                        Interpretación Biometrica</a>
+                    <a href="#ai-dr-alara"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">🤖
+                        Asistente Dr. Alara</a>
+                    <a href="#privacy"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">🛡️
+                        Privacidad y Seguridad</a>
+                    <a href="#support"
+                        class="sidebar-link block px-4 py-3 border-l-2 border-transparent hover:text-white hover:bg-white/5 transition-all text-sm font-medium">📞
+                        Soporte Ético</a>
+                </nav>
             </div>
-            <div class="step">
-                <div class="step-number">II</div>
-                <div class="step-content">
-                    <h3>Posicionamiento</h3>
-                    <p>Sitúese a una distancia de entre 50cm y 80cm de la cámara. Su rostro debe estar centrado y ocupar
-                        aproximadamente el 30% del encuadre visual.</p>
-                </div>
-            </div>
-        </div>
+        </aside>
 
-        <div class="guide-section">
-            <h2>2. Proceso de Escaneo</h2>
-            <div class="step">
-                <div class="step-number">III</div>
-                <div class="step-content">
-                    <h3>Calibración Inicial (Check-In)</h3>
-                    <p>Al iniciar la sesión, el sistema realizará un escaneo basal. Mantenga una expresión neutra y
-                        evite hablar durante los primeros 10-15 segundos mientras se estabilizan los biomarcadores rPPG.
+        <!-- Main Content -->
+        <main class="lg:ml-72 flex-1 p-6 lg:p-20">
+
+            <header class="mb-20 border-b border-gold/10 pb-12">
+                <div class="text-[10px] uppercase tracking-[0.5em] text-gold font-black mb-4">Internal Documentation
+                </div>
+                <h1 class="text-4xl lg:text-6xl font-black text-white mb-6 font-cinzel italic uppercase">Manual de <span
+                        class="text-gold">Operación</span></h1>
+                <p class="text-xl text-zinc-400 font-light">Guía técnica y metodológica para el uso de Fenotipado
+                    Digital en entornos terapéuticos.</p>
+            </header>
+
+            <!-- 1. Welcome -->
+            <section id="welcome" class="mb-24 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4 font-cinzel italic">
+                    <span class="bg-gold/10 text-gold p-3 rounded-xl border border-gold/20">✨</span> Bienvenida
+                </h2>
+                <div
+                    class="bg-[#1a1f18]/40 border border-gold/10 rounded-[40px] p-10 font-light leading-loose text-zinc-300">
+                    <p class="mb-6">Usted está operando uno de los sistemas de bio-feedback más avanzados del mundo. El
+                        <strong>Espejo Neurosomático</strong> permite "ver" el estado del sistema nervioso autónomo sin
+                        usar electrodos ni sensores corporales.
+                    </p>
+                    <p>Esta herramienta no es solo técnica; es un puente de empatía que valida la experiencia subjetiva
+                        del paciente a través de ciencia objetiva.</p>
+                </div>
+            </section>
+
+            <!-- 2. Prep -->
+            <section id="prep" class="mb-24 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4 font-cinzel italic">
+                    <span class="bg-gold/10 text-gold p-3 rounded-xl border border-gold/20">🕯️</span> Preparación del
+                    Entorno
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-[#1a1f18]/60 p-8 rounded-3xl border border-white/5">
+                        <h3 class="text-lg font-bold text-gold mb-4 uppercase tracking-widest font-cinzel">Iluminación
+                        </h3>
+                        <p class="text-sm text-zinc-400 mb-6 font-light">Para que el sensor rPPG detecte el pulso
+                            capilar, la luz es fundamental.</p>
+                        <ul class="space-y-3 text-sm text-zinc-300 font-light">
+                            <li class="flex items-center gap-2"><i data-lucide="sun" class="w-4 h-4 text-gold"></i> Luz
+                                blanca neutra frontal (evitar sombras).</li>
+                            <li class="flex items-center gap-2"><i data-lucide="x-circle"
+                                    class="w-4 h-4 text-red-400"></i> No usar contraluz (ventanas detrás).</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                Piel limpia y rostro despejado.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[#1a1f18]/60 p-8 rounded-3xl border border-white/5">
+                        <h3 class="text-lg font-bold text-gold mb-4 uppercase tracking-widest font-cinzel">Ambiente</h3>
+                        <p class="text-sm text-zinc-400 mb-6 font-light">El sistema nervioso reacciona al entorno.</p>
+                        <ul class="space-y-3 text-sm text-zinc-300 font-light">
+                            <li class="flex items-center gap-2"><i data-lucide="watch" class="w-4 h-4 text-gold"></i> 2
+                                minutos de silencio previo.</li>
+                            <li class="flex items-center gap-2"><i data-lucide="minimize" class="w-4 h-4 text-gold"></i>
+                                Mantener postura relajada y fija.</li>
+                            <li class="flex items-center gap-2"><i data-lucide="message-square"
+                                    class="w-4 h-4 text-gold"></i> Hablar en tono suave y pausado.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Scan -->
+            <section id="scan" class="mb-24 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4 font-cinzel italic">
+                    <span class="bg-gold/10 text-gold p-3 rounded-xl border border-gold/20">📸</span> Proceso de Escaneo
+                </h2>
+                <div class="space-y-6">
+                    <div
+                        class="flex items-start gap-6 p-8 bg-black/40 rounded-3xl border border-white/5 group hover:border-gold/30 transition-all">
+                        <div
+                            class="text-3xl font-black text-gold/20 group-hover:text-gold transition-colors font-cinzel">
+                            01</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-cinzel italic">Calibración Facial</h3>
+                            <p class="text-zinc-400 text-sm font-light">El sistema mapeará 468 puntos de referencia.
+                                Asegúrese de que el óvalo facial esté centrado en el visor.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start gap-6 p-8 bg-black/40 rounded-3xl border border-white/5 group hover:border-gold/30 transition-all">
+                        <div
+                            class="text-3xl font-black text-gold/20 group-hover:text-gold transition-colors font-cinzel">
+                            02</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-cinzel italic">Captura rPPG</h3>
+                            <p class="text-zinc-400 text-sm font-light">Inicie la sesión. El sistema medirá la absorción
+                                de luz en los vasos sanguíneos para graficar el pulso en tiempo real.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start gap-6 p-8 bg-black/40 rounded-3xl border border-white/5 group hover:border-gold/30 transition-all">
+                        <div
+                            class="text-3xl font-black text-gold/20 group-hover:text-gold transition-colors font-cinzel">
+                            03</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-cinzel italic">Micro-expresiones (FACS)
+                            </h3>
+                            <p class="text-zinc-400 text-sm font-light">Mientras el paciente habla, el sistema detecta
+                                AU (Action Units) para identificar emociones latentes o inconscientes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Analytics -->
+            <section id="analytics" class="mb-24 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4 font-cinzel italic">
+                    <span class="bg-gold/10 text-gold p-3 rounded-xl border border-gold/20">🧠</span> Interpretación
+                    Biométrica
+                </h2>
+                <div class="bg-gold/5 border border-gold/20 p-10 rounded-[40px]">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-xl font-bold text-gold mb-6 font-cinzel uppercase tracking-widest italic">
+                                HRV (Variabilidad Cardíaca)</h3>
+                            <p class="text-sm text-zinc-300 leading-relaxed font-light mb-4 text-justify">El HRV es el
+                                indicador más fiel del tono vagal. </p>
+                            <ul class="text-xs space-y-3 text-zinc-400 font-mono italic">
+                                <li><strong>HRV Alto:</strong> Sistema Parasimpático activo (Relajación/Recuperación).
+                                </li>
+                                <li><strong>HRV Bajo:</strong> Sistema Simpático dominante (Estrés/Alerta).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gold mb-6 font-cinzel uppercase tracking-widest italic">
+                                Emoción Predominante</h3>
+                            <p class="text-sm text-zinc-300 leading-relaxed font-light mb-4 text-justify">El sistema
+                                promedia las reacciones de la sesión para mostrar el "Color Somático" del proceso.</p>
+                            <div class="mt-4 p-4 bg-black/40 rounded-xl border border-white/5 flex items-center gap-4">
+                                <i data-lucide="info" class="text-gold w-5 h-5"></i>
+                                <span class="text-[10px] uppercase font-bold tracking-widest">Cruza estos datos con el
+                                    relato verbal del paciente.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Dr. Alara -->
+            <section id="ai-dr-alara" class="mb-24 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4 font-cinzel italic">
+                    <span class="bg-gold/10 text-gold p-3 rounded-xl border border-gold/20">🤖</span> Asistente Dr.
+                    Alara
+                </h2>
+                <p class="text-zinc-400 mb-8 font-light italic">Dr. Alara es su colaborador experto en medicina somática
+                    asistido por Gemini Pro.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="p-8 bg-[#1a1f18]/60 rounded-3xl border border-gold/10 flex flex-col items-center text-center">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-gold mb-4"></i>
+                        <h4 class="text-white font-bold mb-2 font-cinzel">Análisis de Congruencia</h4>
+                        <p class="text-xs text-zinc-500 font-light">Pregunte: "¿Qué tan congruente fue la respuesta
+                            emocional con el tema de la infancia?"</p>
+                    </div>
+                    <div
+                        class="p-8 bg-[#1a1f18]/60 rounded-3xl border border-gold/10 flex flex-col items-center text-center">
+                        <i data-lucide="file-text" class="w-8 h-8 text-gold mb-4"></i>
+                        <h4 class="text-white font-bold mb-2 font-cinzel">Reporte Ejecutivo</h4>
+                        <p class="text-xs text-zinc-500 font-light">Solicite: "Genera una conclusión clínica para el
+                            paciente basada en el HRV promedio de hoy."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Privacy -->
+            <section id="privacy" class="mb-24 scroll-mt-24">
+                <div class="bg-red-500/5 border border-red-500/20 rounded-[40px] p-10">
+                    <h2 class="text-2xl font-bold text-red-400 mb-6 flex items-center gap-4 font-cinzel italic">
+                        <span class="bg-red-400/10 p-3 rounded-xl">🛡️</span> Privacidad y Seguridad
+                    </h2>
+                    <p class="text-zinc-400 text-sm font-light leading-loose mb-6">
+                        Cumplimos con estándares de grado clínico IP-S. <strong>El sistema NO almacena grabaciones de
+                            video de los pacientes.</strong>
+                        Los datos de video se transforman en flujos matemáticos que se procesan localmente.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div
+                            class="p-4 bg-black/40 rounded-xl border border-white/5 text-[9px] font-black uppercase tracking-widest text-zinc-500">
+                            AES-256 Encryption</div>
+                        <div
+                            class="p-4 bg-black/40 rounded-xl border border-white/5 text-[9px] font-black uppercase tracking-widest text-zinc-500">
+                            Vector Anonymization</div>
+                        <div
+                            class="p-4 bg-black/40 rounded-xl border border-white/5 text-[9px] font-black uppercase tracking-widest text-zinc-500">
+                            GDPR / HIPAA Compliant</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mt-32 py-12 border-t border-white/10 text-center w-full relative z-10">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h3 class="text-4xl font-black text-white tracking-tighter mb-2 font-cinzel italic uppercase">
+                        IA.AGUS</h3>
+                    <p class="text-gold mb-10 font-light tracking-[0.4em] text-[10px] uppercase opacity-60">Consultoría
+                        de Inteligencia Artificial Multimodal</p>
+
+                    <div
+                        class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-zinc-400 text-[10px] mb-12 font-semibold uppercase tracking-[0.2em]">
+                        <span class="flex items-center gap-2">Agustín Prieto</span>
+                        <a href="https://wa.me/528711439941" class="hover:text-white transition-colors">+52 871 143
+                            9941</a>
+                        <a href="https://www.ia-agus.com" target="_blank"
+                            class="hover:text-white transition-colors">www.ia-agus.com</a>
+                    </div>
+
+                    <div class="mb-12 flex flex-col items-center">
+                        <img src="../assets/branding/business-card.jpg" alt="IA.AGUS Business Card"
+                            class="max-w-[320px] rounded-lg shadow-2xl border border-white/5 opacity-80 hover:opacity-100 transition-opacity">
+                    </div>
+
+                    <p class="text-[8px] text-zinc-600 uppercase tracking-[0.5em] font-black italic">
+                        © 2026 Espejo-Neurosomático. Todos los derechos reservados.
                     </p>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">IV</div>
-                <div class="step-content">
-                    <h3>Interacción con Dr. Alara</h3>
-                    <p>Siga las instrucciones del asistente de IA. Responda a las preguntas de introspección mientras
-                        observa el monitor. El sistema capturará sus reacciones micro-faciales en tiempo real.</p>
-                </div>
-            </div>
-            <div class="highlight-box">
-                Nota: Neurosomatic-mirror no almacena grabaciones de video. Solo se procesan vectores matemáticos de los
-                movimientos faciales y cambios de flujo sanguíneo.
-            </div>
-        </div>
+            </footer>
 
-        <div class="guide-section">
-            <h2>3. Interpretación de Resultados</h2>
-            <div class="step">
-                <div class="step-number">V</div>
-                <div class="step-content">
-                    <h3>Dashboard de Bio-Metría</h3>
-                    <p>Al finalizar, podrá visualizar su variabilidad cardíaca (HRV) y el mapa de calor emocional. Un
-                        HRV alto generalmente indica un estado de resiliencia y relajación.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">VI</div>
-                <div class="step-content">
-                    <h3>Reporte Ejecutivo</h3>
-                    <p>Puede exportar su sesión en formato PDF. Este documento contiene la validación biológica de su
-                        estado psicológico, ideal para dar seguimiento a procesos de terapia o retiros de bienestar.</p>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p style="color: white; font-weight: 600; margin-bottom: 0.5rem;">IA.AGUS | Agustín Prieto</p>
-            <p style="margin-bottom: 0.5rem;">Tel: <a href="https://wa.me/528711439941"
-                    style="color: inherit; text-decoration: none;">+52 871 143 9941</a></p>
-            <p style="margin-bottom: 0.5rem;"><a href="https://www.ia-agus.com" target="_blank"
-                    style="color: var(--gold); text-decoration: none;">Visitar Sitio Web</a></p>
-            <div class="social-links">
-                <a href="https://www.youtube.com/@ia.agus" target="_blank">YOUTUBE</a>
-                <a href="https://www.facebook.com/ia.agus" target="_blank">FACEBOOK</a>
-            </div>
-            <div style="margin-top: 2rem; opacity: 0.3; font-size: 0.7rem;">NEUROSOMATIC-MIRROR © 2026 Admin:
-                agusstinprieto@gmail.com</div>
-        </footer>
+        </main>
     </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Simple scroll spy logic for highlighting sidebar links
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sidebar-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

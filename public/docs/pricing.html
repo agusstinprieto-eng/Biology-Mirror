@@ -4,269 +4,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precios y Licenciamiento | Neurosomatic-mirror</title>
+    <title>Precios y Licenciamiento | Espejo-Neurosomático</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Raleway:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Cinzel:wght@400;700;900&display=swap"
         rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --forest: #2B3326;
-            --moss: #707A59;
-            --gold: #D6B384;
-            --accent: #EA492E;
-            --cream: #E8E6E6;
-        }
-
         body {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: var(--cream);
-            color: var(--forest);
-            line-height: 1.6;
+            background-color: #0d110b;
+            color: #E8E6E6;
         }
 
-        .nav {
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            box-sizing: border-box;
-            background: rgba(252, 250, 247, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        .text-gold {
+            color: #D6B384;
         }
 
-        .nav a {
-            color: var(--forest);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+        .bg-gold {
+            background-color: #D6B384;
         }
 
-        .container {
-            padding: 10rem 5% 5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .header-title {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            color: var(--forest);
-            margin-bottom: 1rem;
-        }
-
-        /* ... */
-
-        .price-card {
-            background: white;
-            padding: 4rem 3rem;
-            border-radius: 0;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(43, 51, 38, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-card.featured {
-            background: var(--forest);
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 40px 80px rgba(43, 51, 38, 0.2);
-            border: none;
-        }
-
-        .price-card h3 {
-            font-family: 'Raleway', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-        }
-
-        .price {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            font-family: 'Cinzel', serif;
-        }
-
-        .price span {
-            font-size: 1.25rem;
-            font-weight: 400;
-            opacity: 0.6;
-        }
-
-        .features {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .features li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-            font-size: 1rem;
-        }
-
-        .features li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        .price-card.featured .features li::before {
-            color: #a7f3d0;
-        }
-
-        .btn {
-            display: block;
-            padding: 1.5rem;
-            background: var(--dark);
-            color: white;
-            text-decoration: none;
-            border-radius: 4rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: opacity 0.3s;
-        }
-
-        .price-card.featured .btn {
-            background: var(--gold);
-            color: var(--dark);
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .white-label-banner {
-            background: var(--dark);
-            color: white;
-            padding: 6rem;
-            border-radius: 5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 4rem;
-            text-align: left;
-            align-items: center;
-        }
-
-        footer {
-            padding: 8rem 0 4rem;
-            font-size: 0.9rem;
-            color: #999;
+        .border-gold {
+            border-color: #D6B384;
         }
     </style>
 </head>
 
-<body>
-    <nav class="nav">
-        <div style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; color: var(--forest);">
-            Espejo-Neurosomático</div>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <a href="https://espejo-neurosomatico.vercel.app" target="_blank">Ver App ↗</a>
-            <a href="index.html">← Menú</a>
+<body class="min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <div class="bg-gold p-2 rounded-xl">
+                        <i data-lucide="activity" class="text-black w-6 h-6"></i>
+                    </div>
+                    <span class="text-xl font-black italic tracking-tighter uppercase font-cinzel text-white">Espejo
+                        <span class="text-gold">Neurosomático</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <a href="index.html"
+                        class="ml-8 px-4 py-2 rounded-lg hover:bg-white/5 transition-colors font-bold text-xs uppercase italic text-gold">Inicio</a>
+                    <a href="manual.html"
+                        class="ml-4 px-4 py-2 rounded-lg hover:bg-white/5 transition-colors font-bold text-xs uppercase italic">Manual</a>
+                    <a href="mailto:agusstinprieto@gmail.com"
+                        class="ml-4 px-4 py-2 bg-gold text-black rounded-xl font-black text-xs uppercase italic hover:opacity-90 transition-opacity tracking-widest">Adquirir</a>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <h1 class="header-title">Planes y Licencias</h1>
-        <p class="header-desc">Impulsa tu centro de bienestar con validación biológica de vanguardia. Precios diseñados
-            para crecer contigo.</p>
-
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Starter</h3>
-                <div class="price">$3,999<span>/mes MXN</span></div>
-                <p>Ideal para terapeutas individuales y consultores de salud.</p>
-                <ul class="features">
-                    <li>Hasta 50 escaneos/mes</li>
-                    <li>Análisis rPPG y FACS básicos</li>
-                    <li>Reportes PDF con marca estándar</li>
-                    <li>Dashboard de 1 usuario</li>
-                </ul>
-                <a href="#" class="btn">Comenzar</a>
-            </div>
-
-            <div class="price-card featured">
-                <h3>Professional</h3>
-                <div class="price">$11,999<span>/mes MXN</span></div>
-                <p>Nuestra opción favorita para centros de retiro y resorts de lujo.</p>
-                <ul class="features">
-                    <li>Escaneos Ilimitados</li>
-                    <li>Dr. Alara AI (Insights Avanzados)</li>
-                    <li>Reportes PDF Personalizados</li>
-                    <li>Dashboard Multi-usuario</li>
-                    <li>Soporte Prioritario 24/7</li>
-                </ul>
-                <a href="#" class="btn">Mejores Funciones</a>
-            </div>
-
-            <div class="price-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom</div>
-                <p>Para grandes cadenas de hospitales y centros de investigación.</p>
-                <ul class="features">
-                    <li>Acceso completo a la API</li>
-                    <li>On-premise Deployment</li>
-                    <li>SLA de nivel bancario</li>
-                    <li>Formación para equipos</li>
-                </ul>
-                <a href="#" class="btn">Contactar Ventas</a>
-            </div>
+    <!-- Hero -->
+    <div class="pt-40 pb-20 px-4 text-center relative overflow-hidden">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-gold/10 blur-[120px] -z-10 rounded-full">
         </div>
 
-        <div class="white-label-banner">
-            <div>
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1.5rem;">White-Label
-                    Solution</h2>
-                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">
-                    ¿Quieres tu propia App de Fenotipado Digital bajo tu marca? Ofrecemos personalización total de
-                    colores, logos e integración de dominio propio.
-                </p>
-                <a href="mailto:agusstinprieto@gmail.com"
-                    style="color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 5px;">Consultar
-                    Presupuesto White-label</a>
-            </div>
-            <div
-                style="text-align: right; font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-style: italic;">
-                "Tu marca, <br> nuestra tecnología secreta."
-            </div>
-        </div>
-
-        <footer>
-            <p style="color: var(--forest); font-weight: 600; margin-bottom: 0.5rem;">IA.AGUS | Agustín Prieto</p>
-            <p style="margin-bottom: 0.5rem;">Tel: <a href="https://wa.me/528711439941"
-                    style="color: inherit; text-decoration: none;">+52 871 143 9941</a></p>
-            <p style="margin-bottom: 0.5rem;"><a href="https://www.ia-agus.com" target="_blank"
-                    style="color: var(--gold); text-decoration: none;">Visitar Sitio Web</a></p>
-            <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
-                <a href="https://www.youtube.com/@ia.agus" target="_blank"
-                    style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">YOUTUBE</a>
-                <a href="https://www.facebook.com/ia.agus" target="_blank"
-                    style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.8;">FACEBOOK</a>
-            </div>
-            <div style="margin-top: 2rem; opacity: 0.5; font-size: 0.7rem;">NEUROSOMATIC-MIRROR © 2026 | Precios en
-                Pesos Mexicanos (MXN)</div>
-        </footer>
+        <h1 class="text-5xl md:text-8xl font-black italic tracking-tighter uppercase mb-6 font-cinzel">
+            Modelos de <span class="text-gold">Inversión</span>
+        </h1>
+        <p class="text-xl text-zinc-400 max-w-2xl mx-auto mb-4 font-light">
+            Impulsa tu práctica terapéutica o centro de bienestar con validación biológica de vanguardia.
+        </p>
     </div>
+
+    <!-- Pricing Cards -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mb-24">
+
+        <!-- Starter -->
+        <div
+            class="bg-[#1a1f18]/50 border border-zinc-800 rounded-3xl p-8 hover:border-gold transition-all group flex flex-col">
+            <h3 class="text-xl font-black italic uppercase text-zinc-300 font-cinzel">Starter</h3>
+            <div class="flex items-end gap-1 my-6">
+                <span class="text-4xl font-black text-gold">$3,999</span>
+                <span class="text-zinc-500 font-bold mb-1 uppercase text-xs tracking-widest">/mes MXN</span>
+            </div>
+            <p class="text-zinc-400 text-sm mb-8 font-light">Para terapeutas individuales y consultores de salud
+                independientes.</p>
+
+            <ul class="space-y-4 mb-10 text-left flex-1 font-light">
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Hasta 50 escaneos/mes
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Análisis rPPG y FACS básicos
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Reportes PDF marca estándar
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Dashboard de 1 usuario
+                </li>
+            </ul>
+
+            <a href="https://wa.me/528711439941?text=Hola,%20me%20interesa%20el%20plan%20Starter%20del%20Espejo%20Neurosomático"
+                target="_blank"
+                class="block w-full py-4 rounded-xl border border-zinc-700 hover:bg-zinc-800 font-black uppercase italic transition-all text-center text-xs tracking-widest">
+                Comenzar
+            </a>
+        </div>
+
+        <!-- Professional -->
+        <div
+            class="bg-[#2B3326] border-2 border-gold rounded-3xl p-8 transform md:-translate-y-4 shadow-2xl shadow-gold/10 relative overflow-hidden flex flex-col">
+            <div
+                class="absolute top-0 right-0 bg-gold text-black text-[10px] font-black uppercase px-3 py-1.5 rounded-bl-xl tracking-tighter">
+                BEST SELLER
+            </div>
+
+            <h3 class="text-xl font-black italic uppercase text-gold font-cinzel">Professional</h3>
+            <div class="flex items-end gap-1 my-6">
+                <span class="text-5xl font-black text-white">$11,999</span>
+                <span class="text-zinc-500 font-bold mb-1 uppercase text-xs tracking-widest">/mes MXN</span>
+            </div>
+            <p class="text-zinc-300 text-sm mb-8 font-medium italic">Nuestra opción favorita para centros de retiro y
+                resorts de lujo.</p>
+
+            <ul class="space-y-4 mb-10 text-left flex-1">
+                <li class="flex items-center gap-3 text-sm text-white font-bold">
+                    <i data-lucide="check-circle-2" class="text-gold w-5 h-5"></i> Escaneos Ilimitados
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-200">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Dr. Alara AI (Insights Avanzados)
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-200">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Reportes PDF Personalizados
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-200">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Dashboard Multi-usuario (5 máx.)
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-200">
+                    <i data-lucide="check" class="text-gold w-4 h-4"></i> Soporte Prioritario 24/7
+                </li>
+            </ul>
+
+            <a href="https://wa.me/528711439941?text=Hola,%20me%20interesa%20el%20plan%20Professional%20del%20Espejo%20Neurosomático"
+                target="_blank"
+                class="block w-full py-4 rounded-xl bg-gold hover:bg-gold/90 text-black font-black uppercase italic transition-all shadow-lg text-center text-xs tracking-widest">
+                Mejores Funciones
+            </a>
+        </div>
+
+        <!-- White Label -->
+        <div
+            class="bg-[#1a1f18]/50 border border-emerald-500/30 rounded-3xl p-8 hover:border-emerald-500 transition-all group flex flex-col">
+            <h3 class="text-xl font-black italic uppercase text-emerald-400 font-cinzel">White-Label</h3>
+            <div class="flex items-end gap-1 my-6">
+                <span class="text-4xl font-black text-white">Custom</span>
+            </div>
+            <p class="text-zinc-400 text-sm mb-8 font-light">Para grandes centros de investigación y cadenas de
+                clínicas.</p>
+
+            <ul class="space-y-4 mb-10 text-left flex-1 font-light">
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-emerald-500 w-4 h-4"></i> Acceso completo a la API
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-emerald-500 w-4 h-4"></i> Dominio propio e integración de marca
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-emerald-500 w-4 h-4"></i> Almacenamiento On-Premise
+                </li>
+                <li class="flex items-center gap-3 text-sm text-zinc-300">
+                    <i data-lucide="check" class="text-emerald-500 w-4 h-4"></i> SLA de nivel hospitalario
+                </li>
+            </ul>
+
+            <a href="mailto:agusstinprieto@gmail.com?subject=Consulta%20Especial%20White-label%20Neurosomático"
+                target="_blank"
+                class="block w-full py-4 rounded-xl border border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 font-black uppercase italic transition-all text-center text-xs tracking-widest">
+                Contactar Ventas
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Contact Banner -->
+    <div class="max-w-7xl mx-auto px-4 mb-32">
+        <div
+            class="bg-gradient-to-r from-[#2B3326] to-black border border-white/5 rounded-[40px] p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+            <div class="relative z-10 flex-1 text-center md:text-left">
+                <h2 class="text-4xl md:text-5xl font-black italic mb-6 font-cinzel uppercase">Tu propia <span
+                        class="text-gold">Tecnología Secreta</span></h2>
+                <p class="text-zinc-400 text-lg mb-8 font-light">¿Quieres una versión personalizada para tu
+                    organización? Ofrecemos despliegues exclusivos bajo tu propia identidad visual.</p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start font-bold">
+                    <span
+                        class="text-gold border-b-2 border-gold pb-1 text-sm tracking-widest uppercase italic">Personalización
+                        Total de Logos</span>
+                    <span
+                        class="text-gold border-b-2 border-gold pb-1 text-sm tracking-widest uppercase italic ml-4">Algoritmos
+                        a Medida</span>
+                </div>
+            </div>
+            <div class="text-center md:text-right font-cinzel text-3xl font-black italic text-gold/20 leading-tight">
+                "Validación biológica <br> bajo tu propia marca."
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="py-12 border-t border-white/10 text-center w-full relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-3xl font-black text-white tracking-tighter mb-2 font-cinzel">IA.AGUS</h3>
+            <p class="text-gold mb-8 font-light tracking-widest text-xs uppercase opacity-70">Desarrollo de Software
+                Biomédico & IA studio</p>
+
+            <div
+                class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-zinc-400 text-xs mb-12 font-semibold uppercase tracking-[0.2em]">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4 text-gold"></i> Agustín Prieto
+                </span>
+                <a href="https://wa.me/528711439941" class="flex items-center gap-2 hover:text-white transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4 text-gold"></i> +52 871 143 9941
+                </a>
+                <a href="https://www.ia-agus.com" target="_blank"
+                    class="flex items-center gap-2 hover:text-white transition-colors">
+                    <i data-lucide="globe" class="w-4 h-4 text-gold"></i> www.ia-agus.com
+                </a>
+            </div>
+
+            <div class="mb-10 flex flex-col items-center">
+                <img src="../assets/branding/business-card.jpg" alt="IA.AGUS Business Card"
+                    class="max-w-[320px] rounded-lg shadow-2xl border border-white/5 opacity-80 hover:opacity-100 transition-opacity">
+            </div>
+
+            <p class="text-[8px] text-zinc-600 uppercase tracking-[0.4em] font-black italic">
+                © 2026 Espejo-Neurosomático. Todos los derechos reservados.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
