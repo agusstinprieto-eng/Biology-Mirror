@@ -222,8 +222,8 @@ function App() {
       <footer className="p-16 border-t border-neutral-100 text-center bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center gap-12 mb-8 opacity-40">
-            <a href="https://www.youtube.com/@ia.agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">YouTube</a>
-            <a href="https://www.facebook.com/ia.agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">Facebook</a>
+            <a href="https://www.youtube.com/@ia-agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">YouTube</a>
+            <a href="https://www.facebook.com/inteligencia.agus" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--brand-secondary)] transition-colors font-bold text-[10px] tracking-[0.3em] uppercase">Facebook</a>
           </div>
           <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-[0.5em] mb-2">
             &copy; 2026 Espejo-Neurosomático &bull; IA.AGUS
